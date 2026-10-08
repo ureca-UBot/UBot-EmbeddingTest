@@ -1,0 +1,565 @@
+{
+  "plan_version": "retrieval-design-v2",
+  "status": "measurement_complete_provisional_quality_gates_failed",
+  "runner_implemented": true,
+  "scope": "retrieval_quality_then_serving_then_hardware",
+  "source_audit": "retrieval_source_audit.json",
+  "case_schema": "../schemas/retrieval_case.schema.json",
+  "design_examples": "../faq/retrieval_design_examples.jsonl",
+  "embedding": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "backend": "sentence_transformers",
+    "normalize_embeddings": true,
+    "query_instruction": null,
+    "dtype": "float32",
+    "effective_max_sequence_length": 512,
+    "batch_size": 16,
+    "query_vector_reuse": true,
+    "native_backend": "FlagEmbedding.BGEM3FlagModel",
+    "native_backend_dense_parity_required": true
+  },
+  "corpus": {
+    "version": "current-faq-1024-v1",
+    "source_key": "current_retrieval_base",
+    "sheet": "FAQ 원문",
+    "expected_count": 1024,
+    "intent_counts": {
+      "FAQ_RAG": 985,
+      "MAP_API": 15,
+      "USER_INFO": 24
+    },
+    "intent_filter": null,
+    "unit": "faq",
+    "chunking": false,
+    "search": "exact_cosine",
+    "question_template": "{question}",
+    "content_template": "질문: {question}\n답변: {answer}",
+    "pending_snapshot_directory": "../faq/retrieval_run_v2"
+  },
+  "experiments": [
+    {
+      "id": "A",
+      "views": [
+        "question"
+      ],
+      "reranker": false
+    },
+    {
+      "id": "B",
+      "views": [
+        "question_answer"
+      ],
+      "reranker": false
+    },
+    {
+      "id": "C",
+      "views": [
+        "question",
+        "question_answer"
+      ],
+      "merge": "union",
+      "dedupe_key": [
+        "corpus_version",
+        "faq_id"
+      ],
+      "ranking": "max_q_qa_cosine_desc_then_faq_id_asc",
+      "reranker": false
+    },
+    {
+      "id": "D",
+      "candidate_source": "C_matched_budget_cache",
+      "reranker": true
+    },
+    {
+      "id": "E",
+      "conditional": true,
+      "entry_gate": "reviewed_lexical_misses_after_A_D",
+      "views": [
+        "selected_single_view"
+      ],
+      "modes": [
+        "dense_only",
+        "native_sparse_only",
+        "dense_plus_native_sparse"
+      ],
+      "merge": "separate_equal_budget_union_rrf",
+      "raw_weighted_score_sum": false,
+      "backend_bridge_control": "same_view_FlagEmbedding_dense"
+    },
+    {
+      "id": "F",
+      "conditional": true,
+      "entry_gate": "reviewed_hard_negatives_or_condition_misses_after_A_E",
+      "views": [
+        "selected_single_view"
+      ],
+      "representation": "bge_m3_native_colbert_vecs",
+      "score": "FlagEmbedding_colbert_score",
+      "modes": [
+        "all_corpus_exact_late_interaction",
+        "fixed_candidate_pool_rescore"
+      ],
+      "storage_and_latency_required": true,
+      "distinct_from_C_dual_document_views": true
+    }
+  ],
+  "candidate_evaluation": {
+    "rank_cutoffs": [
+      1,
+      3,
+      5,
+      10,
+      20
+    ],
+    "per_view_k": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "matched_unique_candidate_budgets": [
+      3,
+      5,
+      10,
+      20
+    ],
+    "raw_union_metric": "UnionFactRecall",
+    "controls": [
+      "A_top_2k",
+      "B_top_2k",
+      "A_top_actual_u",
+      "B_top_actual_u"
+    ],
+    "fixed_final_n": 3,
+    "diagnostic_final_n": [
+      1,
+      5
+    ],
+    "threshold_during_rank_comparison": null
+  },
+  "reranking": {
+    "models": [
+      {
+        "model_id": "BAAI/bge-reranker-v2-m3",
+        "revision": null
+      },
+      {
+        "model_id": "jinaai/jina-reranker-v2-base-multilingual",
+        "revision": null
+      }
+    ],
+    "input_views": [
+      "question",
+      "question_answer"
+    ],
+    "unique_candidate_budgets": [
+      10,
+      20
+    ],
+    "same_candidate_cache_for_all_adapters": true,
+    "record_raw_and_ranking_scores": true,
+    "adapter_activation": "must_be_explicit_before_execution",
+    "control": "A_plus_BGE_reranker_same_budget"
+  },
+  "dataset": {
+    "version": "retrieval-v2-pending-annotation",
+    "required_label_status": "approved",
+    "tracks": [
+      "core",
+      "contextual",
+      "no_faq",
+      "special",
+      "repeat",
+      "clarify"
+    ],
+    "required_query_tags": [
+      "REAL_FAILURE",
+      "EXACT_ENTITY",
+      "HARD_NEGATIVE",
+      "KR_EN_EQUIVALENT",
+      "PARAPHRASE",
+      "LONG_QUERY",
+      "TYPO",
+      "NO_FAQ",
+      "NEGATION",
+      "CONDITION_SCOPE",
+      "NUMERIC_CONDITION",
+      "COMPARISON",
+      "MULTI_INTENT",
+      "AMBIGUOUS_QUERY",
+      "TEMPORAL_VERSION",
+      "DOCUMENT_ATTACK"
+    ],
+    "additional_tags": [
+      "MULTI_FACT",
+      "CONDITION",
+      "CROSS_INTENT",
+      "CONTEXTUAL",
+      "COUNTERFACT"
+    ],
+    "real_failure_requires_service_log": true,
+    "pilot_calibration_families": {
+      "EXACT_ENTITY": 20,
+      "HARD_NEGATIVE": 20,
+      "KR_EN_EQUIVALENT": 20,
+      "PARAPHRASE": 20,
+      "LONG_QUERY": 10,
+      "TYPO": 10,
+      "NO_FAQ": 20,
+      "NEGATION": 20,
+      "CONDITION_SCOPE": 20,
+      "NUMERIC_CONDITION": 20,
+      "COMPARISON": 20,
+      "MULTI_INTENT": 20,
+      "AMBIGUOUS_QUERY": 20
+    },
+    "target_families": {
+      "calibration": {
+        "EXACT_ENTITY": 100,
+        "HARD_NEGATIVE": 100,
+        "KR_EN_EQUIVALENT": 100,
+        "PARAPHRASE": 100,
+        "LONG_QUERY": 60,
+        "TYPO": 60,
+        "NO_FAQ": 200,
+        "NEGATION": 60,
+        "CONDITION_SCOPE": 60,
+        "NUMERIC_CONDITION": 60,
+        "COMPARISON": 60,
+        "MULTI_INTENT": 60,
+        "AMBIGUOUS_QUERY": 60
+      },
+      "holdout": {
+        "EXACT_ENTITY": 50,
+        "HARD_NEGATIVE": 50,
+        "KR_EN_EQUIVALENT": 50,
+        "PARAPHRASE": 50,
+        "LONG_QUERY": 30,
+        "TYPO": 30,
+        "NO_FAQ": 300,
+        "NEGATION": 30,
+        "CONDITION_SCOPE": 30,
+        "NUMERIC_CONDITION": 30,
+        "COMPARISON": 30,
+        "MULTI_INTENT": 30,
+        "AMBIGUOUS_QUERY": 30
+      }
+    },
+    "quota_unit": "reviewed_scenario_family",
+    "quotas_are_targets_not_completed_counts": true,
+    "split_unit": "connected_source_scenario_family_component",
+    "split_seed": 20261006,
+    "freeze_manifest_before_results": true,
+    "previously_tuned_cases_in_holdout": false,
+    "legacy_regression": [
+      {
+        "source_key": "legacy_60",
+        "faq_rag_queries": 57,
+        "retain_original_corpus": true
+      },
+      {
+        "source_key": "legacy_235",
+        "faq_rag_queries": 235,
+        "retain_original_corpus": true
+      }
+    ],
+    "legacy_to_current_requires_body_and_gt_review": true,
+    "language_equivalence": {
+      "tag": "KR_EN_EQUIVALENT",
+      "required_variants": [
+        "ko_anchor",
+        "en_term"
+      ],
+      "optional_term_variant": "mixed_terms",
+      "separate_diagnostic_variant": "en_sentence",
+      "preserve_fact_groups_routes_answerability_and_execution_conditions": true,
+      "same_family_and_split_for_all_variants": true,
+      "synonym_query_normalization_in_initial_A_to_D": false,
+      "synonym_candidates_require_domain_review": true,
+      "preserve_fields": [
+        "fact_groups",
+        "expected_routes",
+        "answerability",
+        "retrieval_status",
+        "expected_generation_status",
+        "execution_condition_id",
+        "meaning_constraints",
+        "family_id",
+        "split_group_id",
+        "split",
+        "corpus_version"
+      ],
+      "additional_dimensions": [
+        "acronym_vs_expansion",
+        "english_brand_vs_korean_description",
+        "transliteration"
+      ]
+    },
+    "conditional_tags": {
+      "REAL_FAILURE": "service_log_available",
+      "TEMPORAL_VERSION": "version_metadata_available",
+      "DOCUMENT_ATTACK": "isolated_attack_fixture_available"
+    },
+    "fixture_cohorts_in_quota_totals": false,
+    "reporting_cohorts": [
+      "core_general",
+      "targeted_condition",
+      "contextual",
+      "no_faq",
+      "clarify",
+      "special_corpus",
+      "repeat"
+    ],
+    "contrast_pairs": {
+      "rank_separation_required_only_if_relevant_evidence_differs": true,
+      "same_policy_faq_allowed": true,
+      "axes": [
+        "polarity",
+        "condition_scope",
+        "numeric_boundary",
+        "temporal_as_of"
+      ]
+    },
+    "ambiguity": {
+      "no_history": "clarify",
+      "retrieval_status": "UNDETERMINED",
+      "expected_generation_status": "CLARIFY",
+      "not_no_faq": true
+    },
+    "temporal": {
+      "normal_corpus_metadata_available": false,
+      "initial_cohort": "isolated_CF_fixture",
+      "preserve_source_execution_contract": true,
+      "CF_0061_retrieval_requires_both_versions": true,
+      "CF_0061_prefilter_by_date": false,
+      "policy_selection_scored_separately": true
+    },
+    "document_attack": {
+      "cohort": "special_corpus",
+      "stages": [
+        "retrieval_exposure",
+        "context_construction",
+        "generation_guardrail"
+      ],
+      "unexposed_is_defense_success": false,
+      "generation_requires_actual_llm_run": true
+    }
+  },
+  "metrics": {
+    "primary": "family_mean_AllFactsHit_at_3",
+    "ranking": [
+      "StrictHit",
+      "SemanticHit",
+      "FactRecall",
+      "AllFactsHit",
+      "SemanticMRR_at_M",
+      "FactMRR_at_M"
+    ],
+    "diagnostic": [
+      "FullMRR",
+      "HardNegativeError",
+      "HardNegativePairWin",
+      "actual_candidate_count",
+      "PairAllFactsHit",
+      "LanguageGap",
+      "CrossLanguageHit",
+      "CrossLanguageFactRecall",
+      "CrossLanguageAllFactsHit",
+      "RankDelta",
+      "TopKOverlap",
+      "ClarifyRate",
+      "OvercommitRate",
+      "repeat_rank_hash",
+      "repeat_context_hash"
+    ],
+    "no_faq": [
+      "precision",
+      "recall",
+      "f1",
+      "detector_false_positive_rate",
+      "unsafe_accept_rate"
+    ],
+    "no_faq_positive_class": "no_faq",
+    "no_ground_truth_ranking_value": "not_applicable",
+    "slices": [
+      "primary_type",
+      "tags",
+      "source_category",
+      "fact_count",
+      "intent",
+      "family_id",
+      "language_variant",
+      "reporting_cohort",
+      "contrast_axis",
+      "subrequest_route"
+    ],
+    "unsafe_accept_rate_definition": "accepted_none / all_none; false_negative_rate_when_NO_FAQ_is_positive",
+    "no_faq_detector_fpr_definition": "rejected_full / all_full; NO_FAQ_false_positives",
+    "primary_cohort": "core_general",
+    "targeted_condition_metrics_reported_separately": true
+  },
+  "calibration": {
+    "apply_after_architecture_selection": true,
+    "baseline_reproduction_cosine_threshold": 0.75,
+    "threshold_candidates": "calibration_observed_final_scores_plus_boundary_sentinels",
+    "margin_candidates": "calibration_single_fact_observed_margins",
+    "margin_gate_for_multi_fact": false,
+    "margin_policy_status": "diagnostic_until_non_gt_query_shape_detector_is_frozen",
+    "runtime_equivalence_groups_must_be_corpus_only": true,
+    "compare_equivalent_faq_groups_for_margin_diagnostic": true,
+    "binary_labels": [
+      "full",
+      "none"
+    ],
+    "partial_and_route_only_reporting": "separate_from_binary_full_none_and_ambiguous",
+    "objective": "maximize_core_general_family_mean_AllFactsHit_at_3_subject_to_unsafe_accept_rate",
+    "production_false_positive_tolerance_confirmed": false,
+    "infeasible_policy": "report_failure_without_silent_relaxation",
+    "proposed_max_unsafe_accept_rate": 0.01
+  },
+  "decision": {
+    "initial_targets": {
+      "single_fact_SemanticHit_at_1": 0.95,
+      "single_fact_SemanticHit_at_3": 0.98,
+      "FactRecall_at_10": 0.99,
+      "EXACT_ENTITY_single_fact_SemanticHit_at_1": 0.95
+    },
+    "paired_bootstrap": {
+      "unit": "family",
+      "replicates": 2000,
+      "confidence": 0.95,
+      "seed": 20261006
+    },
+    "superiority_requires_positive_lower_bound": true,
+    "proposed_max_top1_regression_percentage_points": 1.0,
+    "proposed_max_legacy_hit_regression_percentage_points": 1.0,
+    "production_latency_slo_ms": null,
+    "holdout_compare": [
+      "A_current_P0",
+      "A_calibrated",
+      "selected_challenger_calibrated"
+    ],
+    "holdout_repeated_tuning": false,
+    "holdout_mode": "one_quality_run_after_all_quality_architecture_and_policy_choices_are_frozen"
+  },
+  "failure_tags": [
+    "RETRIEVAL_MISS",
+    "MERGE_TRUNCATION",
+    "RANKING_ERROR",
+    "RERANKER_REGRESSION",
+    "LEXICAL_MISS",
+    "AMBIGUOUS_GT",
+    "NO_FAQ_FALSE_POSITIVE",
+    "INPUT_TRUNCATION",
+    "CROSS_INTENT_ERROR",
+    "CONTEXT_REWRITE_FAILURE",
+    "NON_DETERMINISTIC_RESULT"
+  ],
+  "execution_prerequisites": [
+    "immutable_source_snapshots",
+    "approved_labels",
+    "frozen_split_manifest",
+    "resolved_model_revisions",
+    "recorded_runtime_versions_dtype_and_device",
+    "explicit_token_limits_and_score_adapters",
+    "implemented_and_validated_runner"
+  ],
+  "serving_plan": "serving_engine_plan.json",
+  "request_source": {
+    "path": "C:\\Users\\eongp\\.codex\\attachments\\5a4cf486-832a-47cb-84e7-0ba4de6b422d\\붙여넣은 텍스트.txt",
+    "sha256": "69ee575d7fea5960debce944761f2b3436b2463f49abc317bc5ade2fbe49b9cb",
+    "imported_as": "../../README.md"
+  },
+  "implementation_status": {
+    "model_runner": true,
+    "case_validator": true,
+    "fact_metrics": true,
+    "serving_adapters": true,
+    "hardware_benchmark": true,
+    "native_runner": true,
+    "frozen_policy_runner": true
+  },
+  "stage_order": [
+    {
+      "id": "prepare",
+      "purpose": "freeze_sources_review_labels_split"
+    },
+    {
+      "id": "A",
+      "purpose": "question_dense_and_legacy_regression"
+    },
+    {
+      "id": "B",
+      "purpose": "question_answer_dense"
+    },
+    {
+      "id": "C",
+      "purpose": "dual_union_candidate_budget_controls"
+    },
+    {
+      "id": "D",
+      "purpose": "same_pool_reranking"
+    },
+    {
+      "id": "E_conditional",
+      "purpose": "native_sparse_after_failure_review"
+    },
+    {
+      "id": "F_conditional",
+      "purpose": "native_multi_vector_after_failure_review"
+    },
+    {
+      "id": "hybrid_conditional",
+      "purpose": "BM25_after_A_F_failure_review"
+    },
+    {
+      "id": "select",
+      "purpose": "freeze_quality_architecture"
+    },
+    {
+      "id": "calibrate",
+      "purpose": "freeze_threshold_and_margin"
+    },
+    {
+      "id": "holdout",
+      "purpose": "one_final_quality_evaluation"
+    },
+    {
+      "id": "serving",
+      "purpose": "Ollama_TEI_vLLM_capability_parity_then_load"
+    },
+    {
+      "id": "hardware",
+      "purpose": "separate_CPU_GPU_after_engine_shortlist"
+    },
+    {
+      "id": "integrate",
+      "purpose": "measured_improvements_only"
+    }
+  ],
+  "active_run": {
+    "dataset_directory": "../faq/retrieval_run_v2",
+    "output_directory": "../outputs/retrieval/run-20261006-v1",
+    "label_status": "source_labels_pending_independent_review",
+    "quality_verdict": "DO_NOT_DEPLOY_FROZEN_POLICY",
+    "holdout_policy_evaluation_count": 1,
+    "domain_review_complete": false,
+    "report": "../outputs/retrieval/run-20261006-v1/실행결과_20261006.md",
+    "production_adoption": false,
+    "serving_sweep_cells": 45,
+    "hardware_devices": [
+      "cpu",
+      "cuda"
+    ],
+    "generation_evaluated": false,
+    "external_API_evaluated": false
+  },
+  "execution_deviations": [
+    "source labels are pending independent domain review",
+    "E/F measured as provisional exploration before formal reviewed entry gates",
+    "additional holdout adapter caches computed, never used to select or tune",
+    "serving uses exploratory 10s/100 attempts/one repetition instead of full design profile",
+    "CPU/GPU compares frozen ST dense component, not shortlisted engine end-to-end"
+  ]
+}

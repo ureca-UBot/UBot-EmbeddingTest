@@ -1,0 +1,56 @@
+{
+  "BAAI/bge-m3": {
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "snapshot_path": "/models/hf/hub/models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181",
+    "files": [
+      "colbert_linear.pt",
+      "tokenizer.json",
+      "modules.json",
+      "tokenizer_config.json",
+      "sentencepiece.bpe.model",
+      "pytorch_model.bin",
+      "sentence_bert_config.json",
+      "special_tokens_map.json",
+      "config_sentence_transformers.json",
+      "sparse_linear.pt",
+      "config.json",
+      "onnx/tokenizer.json",
+      "onnx/tokenizer_config.json",
+      "onnx/sentencepiece.bpe.model",
+      "onnx/special_tokens_map.json",
+      "onnx/config.json",
+      "1_Pooling/config.json"
+    ]
+  },
+  "BAAI/bge-reranker-v2-m3": {
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "snapshot_path": "/models/hf/hub/models--BAAI--bge-reranker-v2-m3/snapshots/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "files": [
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "sentencepiece.bpe.model",
+      "model.safetensors",
+      "special_tokens_map.json",
+      "config.json"
+    ]
+  },
+  "jinaai/jina-reranker-v2-base-multilingual": {
+    "revision": "9cfeff2df7d40d1b78e75e5e9cebec92a99813c9",
+    "snapshot_path": "/models/hf/hub/models--jinaai--jina-reranker-v2-base-multilingual/snapshots/9cfeff2df7d40d1b78e75e5e9cebec92a99813c9",
+    "files": [
+      "tokenizer.json",
+      "block.py",
+      "modeling_xlm_roberta.py",
+      "tokenizer_config.json",
+      "mlp.py",
+      "xlm_padding.py",
+      "configuration_xlm_roberta.py",
+      "stochastic_depth.py",
+      "embedding.py",
+      "model.safetensors",
+      "mha.py",
+      "special_tokens_map.json",
+      "config.json"
+    ]
+  }
+}

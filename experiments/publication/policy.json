@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "source_notice": "Source: SK Telecom / KT / LG U+ public FAQ pages, used for non-commercial research/evaluation",
+  "approved_data_files": {
+    "experiments/model_benchmarks/configs/container_source_paths.json": {
+      "sha256": "82789bb9018dfa54369efaa68d13fb908509c9f2a118ef6bd0769fdfe47e8800",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/model_benchmarks/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/model_benchmarks/configs/retrieval_experiment_plan.json": {
+      "sha256": "7c705954b4f7c7678cc9993669ad3fc0e2e2246307f8ccb2a61d1f9cac45d50c",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/model_benchmarks/configs/retrieval_source_audit.json": {
+      "sha256": "bcdecfcaed5e9ce4b2ff376abef895050b73f0e9cf94613f85f41ebafd1386a3",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/model_benchmarks/configs/serving_engine_plan.json": {
+      "sha256": "ee2286db7e5deb82888302c5512d348e3f2c3ba1c7ad9b2a655b5567eacbc9d2",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/model_benchmarks/schemas/retrieval_case.schema.json": {
+      "sha256": "385a96883b033d32a872e214c09442632409f1d66ff0acfdffcaf217f8476849",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/public_results/aggregate_metrics.json": {
+      "sha256": "6c9ec83d428ab317d5a055772b73002be48805184cd52b1f354a1a9122c6200a",
+      "kind": "aggregate_metrics"
+    },
+    "experiments/public_results/faq_sources.json": {
+      "sha256": "f632eea3d0a4e4ce7a8044fad11e8d69799478f6d7fec8a1c7cb90fd336c6db1",
+      "kind": "source_identifiers_only"
+    },
+    "experiments/public_results/load_metrics.json": {
+      "sha256": "a311a352320790adb72a84d5c251d6efec99b87557f0a283086c4be1a4e6d3f5",
+      "kind": "aggregate_metrics"
+    },
+    "experiments/readme_benchmark/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/engine_calibration_3000/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/engine_calibration_30000/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/faqs_engine_ollama_vllm_30000/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/faqs_engine_ollama_vllm_5000/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_purpose_questions/configs/question_set_policy.json": {
+      "sha256": "f236c5afeb3869e3f5499deef19f0a70223ed0e6b96102d5951e18041fb84ac8",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/configs/resolved_model_revisions.json": {
+      "sha256": "90c90f4c827d04c2221855bc3e116d9f7314006faa298b1a19f68691f47c3731",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v3/manifest.json": {
+      "sha256": "ca8ea2c3dfc361a901116e3ed1b7564cb8705002fb51ecbf38101576e9256bca",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.sha256": {
+      "sha256": "6d609a7bb5fc9b0903bd50b0b3c0df754bc96ebe72c397d9620895aee0c925cc",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.zip": {
+      "sha256": "6f9ad5b72cb4cc13be9088506ba0bf704f97a7c9a9078aa08a76c1d66ee2fc6c",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/PACKAGE_CONTENTS.json": {
+      "sha256": "372c9f20f9cf546043b053878ed4b1924f214ff65a6285a98ba5829a9ac8a070",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/PACKAGE_VALIDATION.json": {
+      "sha256": "88152a14b17bc5f0b5a90b70fc90375266e6db686fd10acc7bb5a95b4c214bb3",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/environment/base.json": {
+      "sha256": "92e223b19649b43434a4e60431c22717a45dcfd1de130c1febfc0b9453d083ca",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/environment/benchmark.json": {
+      "sha256": "e9298d50c1dcc7ffb8c3127c328bf53b96b56bcadf0e04036967a7c76c79cbc3",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/environment/jina.json": {
+      "sha256": "2d4f759264ccbf9ca067fd28430d14bd1a7b40bcc1e1465c7b643941b47520bd",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/environment/runtime-lock.json": {
+      "sha256": "f32edb33c521a5c8ea88e4637a41a5222e8b8f8f9b2553b52706ed707a3d4774",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/evaluation_contract.json": {
+      "sha256": "61dcd31b6654c818364dafad7eb67fba7c055e6a5790c92f2db5f7b64f7d8074",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/ubot-v4-runtime/manifest.json": {
+      "sha256": "71bc16b2176cf13b0a8c90ac3c88cdb0c55e6669069a6b6da47457971a33b237",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/evaluation_contract.json": {
+      "sha256": "61dcd31b6654c818364dafad7eb67fba7c055e6a5790c92f2db5f7b64f7d8074",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/manifest.json": {
+      "sha256": "71bc16b2176cf13b0a8c90ac3c88cdb0c55e6669069a6b6da47457971a33b237",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "experiments/readme_benchmark/schemas/retrieval_case.schema.json": {
+      "sha256": "385a96883b033d32a872e214c09442632409f1d66ff0acfdffcaf217f8476849",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "clustering/outputs/clustering_results_summary.csv": {
+      "sha256": "6057d8ac2045522bb31d6bed2e1b9e6bba73b41b1963d295263f06858b2961ea",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "model_benchmarks/graphs/1_accuracy.png": {
+      "sha256": "fbcc1b3d6bb2c5dcf1e93ebb7d3254326b2ec8fa68cdbc15344406354a751d32",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "model_benchmarks/graphs/2_speed.png": {
+      "sha256": "39b0da83bec54b219883d44f03cbe0e2cd9762bdb7351a41ecc34c814d80bb97",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "model_benchmarks/graphs/3_resource.png": {
+      "sha256": "a6c8382b1b6976242145a6e693f5d692b01ad678da2c407655294e4159055b04",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "model_benchmarks/graphs/4_category.png": {
+      "sha256": "afb2f7f3ad61f0fe76c20c721ed1f13c15425b40f5b3fbccd8610842bcb45c29",
+      "kind": "reviewed_config_or_aggregate_artifact"
+    },
+    "model_benchmarks/outputs/benchmark_results_1000_fixed_summary.csv": {
+      "sha256": "a23ace6a902a50ab3c610fe3d75eaa56564c9d3e46073a71390f15a68dfe4fd9",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "model_benchmarks/outputs/benchmark_results_1000_summary.csv": {
+      "sha256": "4c4a6d6170217790f2a1d6991a68e23b1b7b4a7ce80e2f985375baf4cebcf7a8",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "model_benchmarks/outputs/benchmark_results_unified_summary.csv": {
+      "sha256": "44fa66765c950fee5245f1dc1bde5cfe9b809e8b0e5000c5cc44550084bb476f",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "reranker/outputs/reranker_comparison_summary.csv": {
+      "sha256": "b67d91168c305df2cb8b684e6edf27a38fda3511a832f0cbccdbfab54daab25d",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "reranker/outputs/reranker_comparison_summary_1000.csv": {
+      "sha256": "f607e1675659982c086083d831c0c6d29cef78743cf6c62968b0b4d407331624",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    },
+    "reranker/outputs/reranker_comparison_summary_buffer.csv": {
+      "sha256": "adb9d0fd72d69cf52c45af4fd9619aec73b959350c2bfd6e68c8fd9b7026867c",
+      "kind": "reviewed_config_or_aggregate_artifact",
+      "line_endings": "LF"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "model": "BAAI/bge-m3",
+  "serving_performance_in_scope": false,
+  "dataset_scope": "choose exactly one of existing/kt/skt/lgu before encoding; corpus-, representation-, model- and settings-specific cache",
+  "structure_order": [
+    "A:question dense",
+    "B:question+answer dense",
+    "C:dual vector union",
+    "D:reranker question versus question+answer",
+    "E:sparse only and dense+sparse",
+    "F:native token multivector"
+  ],
+  "candidate_budgets": [
+    3,
+    5,
+    10,
+    20
+  ],
+  "dual_vector_rule": "Report raw union size and fixed-final-K results separately. Do not compare 2K union to single K as equal-budget recall.",
+  "metric_rule": "FAQ alternatives are OR within a fact; required supported facts are AND across facts. Use FactRecall and AllFactsHit. Never divide by unsupported/tool-only facts.",
+  "aggregation": "Report each dataset and each purpose separately. Macro-average purposes only within comparable retrieval tracks; show row-weighted results secondarily. Never hide a missing dataset/purpose behind a pooled mean.",
+  "no_faq": "Evaluate final rejection precision/recall/F1 separately. Binary FAQ_EXISTS vs NO_FAQ only after independent review; exclude PARTIAL/CLARIFY/TOOL_LOOKUP from binary fitting.",
+  "calibration": "Select structure first. Fit score/margin on calibration only, maximize macro-F1 with lower FAQ false rejection as tie breaker. Freeze then evaluate holdout once. Current labels are not fit-ready.",
+  "context": "context_concat_v1 uses only dialogue_history and current query; no gold IDs/source FAQ text/reference rewrite. Same frozen input for all structures. Separate context panel.",
+  "fairness_limits": [
+    "Synthetic authoring is not real traffic.",
+    "Source snapshots have different topic and language distributions.",
+    "Ten scenarios are an authoring minimum, not adequate precision for 95/99 percent claims.",
+    "Known fact/alias/pair/source connections cannot cross splits; unreviewed semantic duplicates may remain.",
+    "Answer-only cue annotation refers to a named source document; alternate gold may contain the cue in its question.",
+    "NO_FAQ absence and multi-answer completeness require independent semantic review."
+  ],
+  "candidate_log_fields": [
+    "dataset_id",
+    "split",
+    "query",
+    "question_id",
+    "expected_faq_ids",
+    "required_facts",
+    "faq_id",
+    "retrieval_rank",
+    "retrieval_cosine",
+    "retrieval_a_rank",
+    "retrieval_a_cosine",
+    "retrieval_b_rank",
+    "retrieval_b_cosine",
+    "rerank_rank",
+    "rerank_score",
+    "rank_delta",
+    "window_count",
+    "winning_window_index",
+    "winning_window_text",
+    "winning_window_score"
+  ],
+  "rank_delta": "retrieval_rank - rerank_rank; missing rank is null, not zero",
+  "uncertainty": "bootstrap or aggregate by leakage group; repeated/translated variants are not independent samples"
+}

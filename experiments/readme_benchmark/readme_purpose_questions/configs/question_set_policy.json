@@ -1,0 +1,47 @@
+{
+  "authoring_standard": "user README section 4; validation purpose governs question content",
+  "knowledge_source": "C:\\Users\\eongp\\Downloads\\FAQ_RAG_15개항목_각200건_총3000건_피드백수정본(1).xlsx",
+  "knowledge_sheet": "FAQ 원문",
+  "source_item_quota_required": false,
+  "brand_category_language_proportions_required": false,
+  "same_ten_variation_types_for_every_parent": false,
+  "mandatory_multi_intent_for_every_parent": false,
+  "mandatory_bilingual_for_every_parent": false,
+  "synthetic_real_failures_allowed": false,
+  "synthetic_policy_versions_allowed": false,
+  "all_missing_context_questions_are_no_faq": false,
+  "generation_abstain_implies_no_faq": false,
+  "corpus_gt_independent_from_provided_context": true,
+  "latest_explicit_size_request": {
+    "base_pairs": 500,
+    "variants_per_base_requested": 10,
+    "rule": "size is tracked separately from purpose; no padding with repeated or irrelevant mutations"
+  },
+  "case_required_fields": [
+    "case_id",
+    "query",
+    "primary_validation_purpose",
+    "validation_purpose",
+    "changed_elements",
+    "preserved_elements",
+    "required_facts",
+    "retrieval_status",
+    "generation_expected_state",
+    "failure_criteria",
+    "execution_group",
+    "evidence_review_status"
+  ],
+  "execution_groups": {
+    "core": "independently interpretable answerable query",
+    "context": "dialogue-dependent; freeze rewrite separately before retrieval",
+    "no_faq": "required answer absent from full corpus, not merely absent from provided Context",
+    "special_condition": "explicit entity, negative/condition/numeric contrast or insufficient detail",
+    "document_attack": "isolated document fixture; not averaged with ordinary retrieval",
+    "repeat": "same case replay, not independent question rows"
+  },
+  "fact_gt": "each fact has acceptable_faq_ids and source evidence; one FAQ may satisfy multiple facts",
+  "language_pairs": "same intent, entity, numbers/units, conditions and fact GT; change language only",
+  "model_query_rule": "raw query for independently interpretable cases; fixed actual rewrite for context cases; never append GT, facts or expected answer",
+  "review_rule": "structural checks cannot replace semantic/absence/contrast review",
+  "serving_execution_status": "paused; this artifact changes question authoring only"
+}

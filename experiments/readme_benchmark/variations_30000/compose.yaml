@@ -1,0 +1,26 @@
+name: ubot-variations-30000
+services:
+  dataset:
+    image: ubot-retrieval-benchmark:run-v1
+    working_dir: /work
+    command: [scripts/build_variations.py]
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    environment:
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      HF_HOME: /models/hf
+    volumes:
+      - .:/work:ro
+      - ./data:/work/data
+      - ./outputs:/work/outputs
+      - ../engine_calibration_3000/data:/engine_calibration_3000/data:ro
+      - hf_models:/models/hf:ro
+    tmpfs: [/tmp]
+volumes:
+  hf_models:
+    external: true
+    name: ubot-retrieval-benchmark_hf-benchmark-cache

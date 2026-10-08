@@ -1,0 +1,78 @@
+# Public repository: code, methods and reviewed aggregate results only.
+# Everything else remains private/local at its existing runtime path.
+*
+!*/
+!*.py
+!*.ps1
+!*.java
+!*.mjs
+!*.md
+!*.yaml
+!*.yml
+!Dockerfile*
+!requirements*.txt
+!requirements*.lock
+!.gitignore
+!.gitattributes
+!.dockerignore
+!.env.example
+
+# Runtime configuration and schemas, not question/answer records.
+!**/configs/*.json
+!**/schemas/*.json
+!**/manifest.json
+!**/evaluation_contract.json
+!**/environment/*.json
+!**/PACKAGE_CONTENTS.json
+!**/PACKAGE_VALIDATION.json
+
+# No corpus, generated evaluation rows, source snapshots or review exports.
+**/faq/
+**/data/
+**/datasets/
+**/source/
+**/sources/
+**/authoring/
+**/review/
+**/exports/
+**/outputs/**
+!**/outputs/**/
+**/cache/
+**/runtime/
+**/_verification/
+**/qa/
+**/node_modules/
+**/__pycache__/
+**/.pytest_cache/
+**/.venv/
+**/.private/
+.env
+.env.*
+!.env.example
+
+# Authored question banks embedded in source files remain private as well.
+/experiments/readme_benchmark/scripts/author_readme_seedbook.py
+/experiments/readme_benchmark/readme_serving_retest/fair_eval_v2/fact_spec.py
+
+# Reviewed, body-free aggregate tables and charts from model comparisons.
+!/clustering/outputs/clustering_results_summary.csv
+!/model_benchmarks/outputs/benchmark_results_1000_summary.csv
+!/model_benchmarks/outputs/benchmark_results_1000_fixed_summary.csv
+!/model_benchmarks/outputs/benchmark_results_unified_summary.csv
+!/reranker/outputs/reranker_comparison_summary.csv
+!/reranker/outputs/reranker_comparison_summary_1000.csv
+!/reranker/outputs/reranker_comparison_summary_buffer.csv
+!/model_benchmarks/graphs/1_accuracy.png
+!/model_benchmarks/graphs/2_speed.png
+!/model_benchmarks/graphs/3_resource.png
+!/model_benchmarks/graphs/4_category.png
+
+# Explicit public exports: aggregate numbers and FAQ ID/source URL only.
+!/experiments/public_results/aggregate_metrics.json
+!/experiments/public_results/load_metrics.json
+!/experiments/public_results/faq_sources.json
+!/experiments/publication/policy.json
+
+# This archive contains code/environment only, never the private dataset ZIP.
+!/experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.zip
+!/experiments/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.sha256

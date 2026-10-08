@@ -1,0 +1,50 @@
+{
+  "python": "3.12.3",
+  "base_image": "vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90",
+  "original_images": {
+    "ubot-retrieval-benchmark:run-v1": "sha256:7f65c030c30efa601e87a82762833a8a90bddd0145d3c1e606c2ff71efa7cea0",
+    "ubot-retrieval-jina:run-v1": "sha256:30a9ff3f129558caa28210ce67aca22ca5000a2f8a4562770226a1761e60c081"
+  },
+  "models": {
+    "BAAI/bge-m3": "5617a9f61b028005a4858fdac845db406aefb181",
+    "BAAI/bge-reranker-v2-m3": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "jinaai/jina-reranker-v2-base-multilingual": "9cfeff2df7d40d1b78e75e5e9cebec92a99813c9"
+  },
+  "ollama_model": {
+    "name": "bge-m3:latest",
+    "manifest_digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "gguf_sha256": "daec91ffb5dd0c27411bd71f29932917c49cf529a641d0168496c3a501e3062c",
+    "quantization": "F16"
+  },
+  "original_code_hashes": {
+    "dataset.py": "405e5ed346d8b3d0e4b58c1778c88297a6e456aff02efa6a5147ca9331f5fa2c",
+    "manifest.json": "71bc16b2176cf13b0a8c90ac3c88cdb0c55e6669069a6b6da47457971a33b237",
+    "evaluation_contract.json": "61dcd31b6654c818364dafad7eb67fba7c055e6a5790c92f2db5f7b64f7d8074",
+    "serving_test/common_v4.py": "14c0a82269786d37c072189e1a7fda9c3d338b5ae3a3ce9d6dfd1c28c1cf17d1",
+    "serving_test/compare_v4.py": "f191d8c7e3232232162d3d7777f65b16ce8555c8d36f881693d62f65a2d462a2",
+    "serving_test/run_native.py": "54327716b44b735e1b99883876907597aa145a1adb6869d2bdc935e0be42c3ec",
+    "serving_test/run_rerank.py": "c3aaaaf41700dfd1885dd833a57225df5747ced3c4e67006c7385ef3266499ba",
+    "serving_test/run_v4.py": "06e201e8fa55e53ffcdaac00a3d5e0cae225308caf54d01394f67d3015443a53",
+    "serving_test/inspect_log.py": "1c094f4f1a21faa476d7dc50840e8e483ef6ccf884bc329cee4fb889f59571e9",
+    "serving_test/test_runner.py": "4c76222e30b42d75e25ce3b3e61b7ccbf1575bd9cfcd69f209ca98bfbdaf878e",
+    "serving_test/test_native_math.py": "6b1723e3a166fd6a50c8f12f3e44ea652fd07e4a47c1cb3a2913aaab9d45c0ca"
+  },
+  "fixtures": {
+    "existing": {
+      "repeat.jsonl": "87c3c88e5728d46704fdcd95188e6baf3627ad35a40c61bfa5d07c3b99ceb781",
+      "document_attack.jsonl": "2b43dd7f55ddc0cfbe19460e5ab3821b999528ecd8807860297dd86269cffdd5"
+    },
+    "kt": {
+      "repeat.jsonl": "0b0c138c96b5ffbcd50f1beb10b6ad820f89b166602066e03834fadcc96dd3f1",
+      "document_attack.jsonl": "e0221366d037424c6672c99cc7f0c14883b19b29f03188605d6e678c6666ce6e"
+    },
+    "skt": {
+      "repeat.jsonl": "1f67396200273a76cb41da622a4b6cd4a5e0e5b9a54f52172c0d449a6f65b8bd",
+      "document_attack.jsonl": "30157caeae9820908fc03cfc792d129177da5abc12826ebc2ed39a9f117ac7ce"
+    },
+    "lgu": {
+      "repeat.jsonl": "e72bd63a4e6dd5311efd41906a0a1c701f2b3c69d3c923308b2f693ffe25d9ee",
+      "document_attack.jsonl": "ba8de07868e20c652b242c465956b2f38847b180f3be8a726fb456ac6026f1a1"
+    }
+  }
+}

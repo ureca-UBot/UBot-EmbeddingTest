@@ -1,0 +1,170 @@
+{
+  "schema_version": 4,
+  "dataset_ids": [
+    "existing",
+    "kt",
+    "skt",
+    "lgu"
+  ],
+  "datasets": {
+    "existing": {
+      "brand": null,
+      "faq_count": 1024,
+      "question_count": 340,
+      "corpus_sha256": "06e47f669da09ec9bcc667b0e9774047640c62e59244b2d1e80eec56465db807",
+      "questions_sha256": "cb9a851695bb77849676b098d45e4c48e0321b2c70b60b8b1471b2be28ea3eae",
+      "split_counts": {
+        "calibration": 85,
+        "development": 170,
+        "holdout": 85
+      },
+      "purpose_counts": {
+        "NEGATION": 20,
+        "CONDITION_SCOPE": 21,
+        "PARAPHRASE": 31,
+        "NUMERIC_CONDITION": 30,
+        "EXACT_ENTITY": 12,
+        "COMPARISON": 10,
+        "KR_EN_EQUIVALENT": 34,
+        "TYPO": 17,
+        "LONG_QUERY": 17,
+        "MULTI_INTENT": 17,
+        "NO_FAQ": 68,
+        "PARTIAL": 17,
+        "AMBIGUOUS_QUERY": 17,
+        "CONTEXT_RETRIEVAL": 17,
+        "HARD_NEGATIVE": 12
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 238,
+        "NO_FAQ": 68,
+        "PARTIAL_FACTS_EXIST": 17,
+        "UNDERSPECIFIED": 17
+      },
+      "leakage_group_count": 88,
+      "readme_core_coverage_complete": true
+    },
+    "kt": {
+      "brand": "KT",
+      "faq_count": 1099,
+      "question_count": 769,
+      "corpus_sha256": "4c411e0b1b6a265c51ba077afde8177b3d5582c4a67883a1c122c830da62a759",
+      "questions_sha256": "5296737764da735fd25d874b5a6f01e701ef47a0efd96043e3e4b9dd6faffbb8",
+      "split_counts": {
+        "development": 385,
+        "calibration": 192,
+        "holdout": 192
+      },
+      "purpose_counts": {
+        "NEGATION": 93,
+        "CONDITION_SCOPE": 167,
+        "EXACT_ENTITY": 79,
+        "NUMERIC_CONDITION": 134,
+        "PARAPHRASE": 119,
+        "COMPARISON": 15,
+        "HARD_NEGATIVE": 10,
+        "KR_EN_EQUIVALENT": 70,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 16,
+        "NO_FAQ": 10,
+        "TOOL_LOOKUP": 5,
+        "PARTIAL": 11,
+        "AMBIGUOUS_QUERY": 10
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 736,
+        "NO_FAQ": 10,
+        "NOT_APPLICABLE": 2,
+        "PARTIAL_FACTS_EXIST": 11,
+        "UNDERSPECIFIED": 10
+      },
+      "leakage_group_count": 420,
+      "readme_core_coverage_complete": true
+    },
+    "skt": {
+      "brand": "SKT",
+      "faq_count": 1305,
+      "question_count": 619,
+      "corpus_sha256": "49e701643d8677142148db2406df1446a2fde240d445736fb9383ff0fb6c38be",
+      "questions_sha256": "0fd5f0a8b50b3a63215f776dd89d6007e5c7ef32ef9b6d4c8647849afb86e36b",
+      "split_counts": {
+        "development": 309,
+        "calibration": 155,
+        "holdout": 155
+      },
+      "purpose_counts": {
+        "CONDITION_SCOPE": 129,
+        "NUMERIC_CONDITION": 86,
+        "EXACT_ENTITY": 52,
+        "NEGATION": 103,
+        "PARAPHRASE": 59,
+        "COMPARISON": 30,
+        "HARD_NEGATIVE": 10,
+        "KR_EN_EQUIVALENT": 70,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 15,
+        "NO_FAQ": 10,
+        "TOOL_LOOKUP": 5,
+        "PARTIAL": 10,
+        "AMBIGUOUS_QUERY": 10
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 587,
+        "NO_FAQ": 10,
+        "NOT_APPLICABLE": 2,
+        "PARTIAL_FACTS_EXIST": 10,
+        "UNDERSPECIFIED": 10
+      },
+      "leakage_group_count": 378,
+      "readme_core_coverage_complete": true
+    },
+    "lgu": {
+      "brand": "LG U+",
+      "faq_count": 131,
+      "question_count": 190,
+      "corpus_sha256": "2e2e47ed792dba523899cf9ac3ed3c68cf2ee7e769788eefeecb95114a748a08",
+      "questions_sha256": "54f4db7a204cc445e58c9f4dfb548bd6d8de2db576a27e14d33d0938d626ae71",
+      "split_counts": {
+        "holdout": 47,
+        "development": 95,
+        "calibration": 48
+      },
+      "purpose_counts": {
+        "CONDITION_SCOPE": 14,
+        "NEGATION": 11,
+        "NUMERIC_CONDITION": 12,
+        "EXACT_ENTITY": 17,
+        "PARAPHRASE": 16,
+        "COMPARISON": 11,
+        "HARD_NEGATIVE": 10,
+        "KR_EN_EQUIVALENT": 20,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 15,
+        "NO_FAQ": 10,
+        "TOOL_LOOKUP": 3,
+        "PARTIAL": 11,
+        "AMBIGUOUS_QUERY": 10
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 157,
+        "NO_FAQ": 10,
+        "NOT_APPLICABLE": 2,
+        "PARTIAL_FACTS_EXIST": 11,
+        "UNDERSPECIFIED": 10
+      },
+      "leakage_group_count": 45,
+      "readme_core_coverage_complete": true
+    }
+  },
+  "scope_rule": "Choose one dataset before corpus embedding; never pool carriers.",
+  "source_v3_manifest_sha256": "ca8ea2c3dfc361a901116e3ed1b7564cb8705002fb51ecbf38101576e9256bca",
+  "serving_runs_performed": false,
+  "independent_review_status": "pending",
+  "threshold_fitting_ready": false
+}

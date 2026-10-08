@@ -1,0 +1,626 @@
+{
+  "existing": {
+    "ollama": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 3.166373526000001,
+        "requests_per_second": 20.21239739230942,
+        "latency_seconds": {
+          "p50": 0.03186697350000145,
+          "p95": 0.06804451135001835,
+          "p99": 0.09945377621999081
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.4670736500000032,
+        "requests_per_second": 43.62425840038764,
+        "latency_seconds": {
+          "p50": 0.06884428050000224,
+          "p95": 0.11628284909999421,
+          "p99": 0.12588844894000828
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.2248063229999957,
+        "requests_per_second": 52.253159375631526,
+        "latency_seconds": {
+          "p50": 0.13223574700000995,
+          "p95": 0.16967577829998104,
+          "p99": 0.18299173829999002
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.7059035790000223,
+        "requests_per_second": 37.51677456325869,
+        "latency_seconds": {
+          "p50": 0.40079758049998304,
+          "p95": 0.47845663645001507,
+          "p99": 0.48632770067000447
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.4376708129999827,
+        "requests_per_second": 44.516449399464,
+        "latency_seconds": {
+          "p50": 0.6141017794999897,
+          "p95": 0.6847013894500151,
+          "p99": 0.7078086913899931
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      }
+    ],
+    "vllm": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 3.49867505200001,
+        "requests_per_second": 18.29263908444842,
+        "latency_seconds": {
+          "p50": 0.04839831900002878,
+          "p95": 0.07036981434999916,
+          "p99": 0.08671574847998895
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999982714653015
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.1163442280000027,
+        "requests_per_second": 57.329986929443635,
+        "latency_seconds": {
+          "p50": 0.058266812500022525,
+          "p95": 0.08972147065004492,
+          "p99": 0.09429145296999648
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999979734420776
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.7476770530000181,
+        "requests_per_second": 85.59845422994205,
+        "latency_seconds": {
+          "p50": 0.07917463600003316,
+          "p95": 0.1122491913499772,
+          "p99": 0.11832135672999185
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999983310699463
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.6367411059999881,
+        "requests_per_second": 100.51180832669722,
+        "latency_seconds": {
+          "p50": 0.12009868449996475,
+          "p95": 0.17808054255002045,
+          "p99": 0.20352153275000995
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999979734420776
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.4821724679999875,
+        "requests_per_second": 132.7325889540455,
+        "latency_seconds": {
+          "p50": 0.16471072850001178,
+          "p95": 0.22914929479999266,
+          "p99": 0.2603179792800153
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999980330467224
+      }
+    ]
+  },
+  "kt": {
+    "ollama": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 3.416042113000003,
+        "requests_per_second": 18.735132027922965,
+        "latency_seconds": {
+          "p50": 0.031615268499990634,
+          "p95": 0.05911360595000019,
+          "p99": 0.09418271695997131
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.7900687080000353,
+        "requests_per_second": 35.75281759519967,
+        "latency_seconds": {
+          "p50": 0.08525024550002058,
+          "p95": 0.14831390109998208,
+          "p99": 0.15574914481000687
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.5417320829999994,
+        "requests_per_second": 41.511752077873844,
+        "latency_seconds": {
+          "p50": 0.1697860834999858,
+          "p95": 0.22281359649998927,
+          "p99": 0.23300686587999508
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.5415413910000098,
+        "requests_per_second": 41.51688717127648,
+        "latency_seconds": {
+          "p50": 0.3490482549999854,
+          "p95": 0.38354928430001106,
+          "p99": 0.3920896860599765
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.9276297939999836,
+        "requests_per_second": 33.201395931526335,
+        "latency_seconds": {
+          "p50": 0.8153548094999792,
+          "p95": 0.9846330394500057,
+          "p99": 1.0151704561299955
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      }
+    ],
+    "vllm": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 3.37305182099999,
+        "requests_per_second": 18.973915432175684,
+        "latency_seconds": {
+          "p50": 0.04433162049997463,
+          "p95": 0.0629039528499618,
+          "p99": 0.13638570776002845
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.999998152256012
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.143786513000009,
+        "requests_per_second": 55.95449786528432,
+        "latency_seconds": {
+          "p50": 0.06393844200005105,
+          "p95": 0.08663846080008283,
+          "p99": 0.08904351040994811
+        },
+        "top1_consistency": 0.984375,
+        "min_embedding_cosine": 0.999998152256012
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.7779143349999913,
+        "requests_per_second": 82.27126962508117,
+        "latency_seconds": {
+          "p50": 0.07959524799997553,
+          "p95": 0.10995269200000732,
+          "p99": 0.1253630059000477
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999983310699463
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.7035359490000701,
+        "requests_per_second": 90.96905437591737,
+        "latency_seconds": {
+          "p50": 0.13196862450001845,
+          "p95": 0.1654587263999815,
+          "p99": 0.17100895429997534
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999984502792358
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.5497165620000715,
+        "requests_per_second": 116.42363433101671,
+        "latency_seconds": {
+          "p50": 0.17679152649998287,
+          "p95": 0.2997607268000422,
+          "p99": 0.33206102381000274
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999829530715942
+      }
+    ]
+  },
+  "skt": {
+    "ollama": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 3.9090375539999513,
+        "requests_per_second": 16.37231648862302,
+        "latency_seconds": {
+          "p50": 0.03656547899998941,
+          "p95": 0.07866001274991843,
+          "p99": 0.12663159215000397
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.4673816249999163,
+        "requests_per_second": 43.61510251295647,
+        "latency_seconds": {
+          "p50": 0.07038144799997781,
+          "p95": 0.10219570940005837,
+          "p99": 0.1084584201299765
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.3452688309999985,
+        "requests_per_second": 47.57413427353843,
+        "latency_seconds": {
+          "p50": 0.1353130544999317,
+          "p95": 0.17058486694992891,
+          "p99": 0.18207638911001137
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.389745081000001,
+        "requests_per_second": 46.05161110118724,
+        "latency_seconds": {
+          "p50": 0.28820850799996833,
+          "p95": 0.37908713645000486,
+          "p99": 0.3897038016000124
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.6637465519999068,
+        "requests_per_second": 38.46739752702645,
+        "latency_seconds": {
+          "p50": 0.6341727549999518,
+          "p95": 0.7913900503500485,
+          "p99": 0.8115159985700166
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      }
+    ],
+    "vllm": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 2.820874086999993,
+        "requests_per_second": 22.688003089164525,
+        "latency_seconds": {
+          "p50": 0.03704906299998356,
+          "p95": 0.05978594699993208,
+          "p99": 0.09430115703999027
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999958872795105
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.0520086020000008,
+        "requests_per_second": 60.83600445692929,
+        "latency_seconds": {
+          "p50": 0.05575107500004606,
+          "p95": 0.07793677044996343,
+          "p99": 0.08630142182996904
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999884366989136
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.8300305689999732,
+        "requests_per_second": 77.1055939266281,
+        "latency_seconds": {
+          "p50": 0.08747521949999282,
+          "p95": 0.1242029594499911,
+          "p99": 0.1296287689299913
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.999998152256012
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.6403472900000224,
+        "requests_per_second": 99.94576536741143,
+        "latency_seconds": {
+          "p50": 0.1219592920000423,
+          "p95": 0.1776893631000234,
+          "p99": 0.18596378994998303
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999932050704956
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.5155008829999588,
+        "requests_per_second": 124.15109674992569,
+        "latency_seconds": {
+          "p50": 0.16262073749999217,
+          "p95": 0.22652076614998576,
+          "p99": 0.26225536927000803
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999960660934448
+      }
+    ]
+  },
+  "lgu": {
+    "ollama": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.8660782289999815,
+        "requests_per_second": 34.29652573263081,
+        "latency_seconds": {
+          "p50": 0.022738010500006567,
+          "p95": 0.05123264349997498,
+          "p99": 0.059860165949962664
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.186085749999961,
+        "requests_per_second": 53.95899917017138,
+        "latency_seconds": {
+          "p50": 0.06983557649999739,
+          "p95": 0.10048039724998716,
+          "p99": 0.10627874403997224
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.1016009869999834,
+        "requests_per_second": 58.09726094590088,
+        "latency_seconds": {
+          "p50": 0.13327224249997016,
+          "p95": 0.15922931340003857,
+          "p99": 0.16649867222996134
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.0574333829999887,
+        "requests_per_second": 60.523907254023854,
+        "latency_seconds": {
+          "p50": 0.24908873300006462,
+          "p95": 0.2904216201999986,
+          "p99": 0.2942060057699916
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 1.0533519699999943,
+        "requests_per_second": 60.7584186698776,
+        "latency_seconds": {
+          "p50": 0.4937035260000471,
+          "p95": 0.533610324300099,
+          "p99": 0.5413556410900526
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999998807907104
+      }
+    ],
+    "vllm": [
+      {
+        "concurrency": 1,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 2.046320661999971,
+        "requests_per_second": 31.275645693500262,
+        "latency_seconds": {
+          "p50": 0.0312907229999837,
+          "p95": 0.03985643625003377,
+          "p99": 0.04234630999006186
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999645352363586
+      },
+      {
+        "concurrency": 4,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.7393427209999572,
+        "requests_per_second": 86.56337336146399,
+        "latency_seconds": {
+          "p50": 0.04242807849993824,
+          "p95": 0.05684085770011506,
+          "p99": 0.07874582909991204
+        },
+        "top1_consistency": 0.984375,
+        "min_embedding_cosine": 0.9999908804893494
+      },
+      {
+        "concurrency": 8,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.5272044250000363,
+        "requests_per_second": 121.39503571123402,
+        "latency_seconds": {
+          "p50": 0.06365657249989454,
+          "p95": 0.07821264800004428,
+          "p99": 0.08200816947996371
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999556541442871
+      },
+      {
+        "concurrency": 16,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.38133118200016725,
+        "requests_per_second": 167.8331146808024,
+        "latency_seconds": {
+          "p50": 0.08871341900010066,
+          "p95": 0.10713690709995943,
+          "p99": 0.1104363106301639
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999686479568481
+      },
+      {
+        "concurrency": 32,
+        "requests": 64,
+        "successes": 64,
+        "failures": 0,
+        "seconds": 0.2823367739999867,
+        "requests_per_second": 226.67964605986117,
+        "latency_seconds": {
+          "p50": 0.11311116499996388,
+          "p95": 0.14362856649987635,
+          "p99": 0.1556365875800202
+        },
+        "top1_consistency": 1.0,
+        "min_embedding_cosine": 0.9999556541442871
+      }
+    ]
+  }
+}

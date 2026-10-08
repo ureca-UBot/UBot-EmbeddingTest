@@ -1,0 +1,330 @@
+{
+  "plan_version": "serving-design-v1",
+  "status": "initial_measurement_complete",
+  "adapters_implemented": true,
+  "prerequisites": [
+    "selected_architecture_hash",
+    "calibrated_policy_hash",
+    "completed_frozen_quality_holdout",
+    "capability_and_parity_probe"
+  ],
+  "model_id": "BAAI/bge-m3",
+  "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "hardware_comparison_phase": "after_engine_shortlist",
+  "same_hardware_for_initial_engine_comparison": true,
+  "dense_common_lane": [
+    "Ollama",
+    "TEI",
+    "vLLM"
+  ],
+  "capability_claims_are_pending_probes": false,
+  "engines": [
+    {
+      "id": "Ollama",
+      "version": "0.35.0",
+      "base_url": "http://127.0.0.1:11435",
+      "dense_endpoint": "/api/embed",
+      "input_batch_type": "input_string_array",
+      "truncate": false,
+      "artifact_format": "GGUF_F16",
+      "artifact_hash": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "quantization": "F16",
+      "dense_capability": "AVAILABLE",
+      "native_sparse_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "native_colbert_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "source": "https://docs.ollama.com/api/embed",
+      "result_directory": "../outputs/retrieval/run-20261006-v1/serving/ollama",
+      "source_HF_revision_verified": false,
+      "configured_context_length": 8192,
+      "parity_status": "drift_detected",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    },
+    {
+      "id": "TEI",
+      "version": "1.9.4",
+      "base_url": "http://127.0.0.1:8081",
+      "dense_endpoint": "/embed",
+      "artifact_format": "HF_safetensors_float32_CLS_512",
+      "dense_capability": "AVAILABLE",
+      "native_sparse_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "native_colbert_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "source": "https://huggingface.co/docs/text-embeddings-inference/en/supported_models",
+      "result_directory": "../outputs/retrieval/run-20261006-v1/serving/tei",
+      "artifact_hash": "993b2248881724788dcab8c644a91dfd63584b6e5604ff2037cb5541e1e38e7e",
+      "quantization": "none",
+      "effective_max_tokens": 512,
+      "max_concurrent_requests": 2048,
+      "failed_capacity_variant_preserved": "tei-default-capacity-512",
+      "parity_status": "passed",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    },
+    {
+      "id": "vLLM",
+      "version": "0.30.0",
+      "base_url": "http://127.0.0.1:8001",
+      "dense_endpoint": "/v1/embeddings",
+      "native_endpoint": "/pooling",
+      "artifact_format": "HF_safetensors_float32_CLS_512",
+      "architecture_override": "BgeM3EmbeddingModel",
+      "dense_task": "embed",
+      "sparse_task": "token_classify",
+      "sparse_token_ids_endpoint": "/tokenize",
+      "multi_vector_task": "token_embed",
+      "dense_capability": "AVAILABLE",
+      "native_sparse_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "native_colbert_capability": "NOT_PROBED_IN_DENSE_LANE",
+      "source": "https://docs.vllm.ai/en/stable/models/pooling_models/specific_models/",
+      "result_directory": "../outputs/retrieval/run-20261006-v1/serving/vllm",
+      "artifact_hash": "993b2248881724788dcab8c644a91dfd63584b6e5604ff2037cb5541e1e38e7e",
+      "quantization": "none",
+      "effective_max_tokens": 512,
+      "parity_status": "passed",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    }
+  ],
+  "parity": {
+    "pin": [
+      "weights_revision_or_artifact_hash",
+      "tokenizer_revision",
+      "pooling",
+      "normalization",
+      "effective_max_tokens",
+      "dtype",
+      "quantization",
+      "truncation_policy",
+      "input_texts_and_order"
+    ],
+    "reference": "frozen_quality_backend",
+    "checks": [
+      "vector_dimension",
+      "finite_values",
+      "norm",
+      "cosine_to_reference",
+      "max_absolute_error",
+      "top_k_overlap",
+      "fact_metrics_delta",
+      "threshold_decision_drift"
+    ],
+    "numeric_tolerances": {
+      "minimum_cosine_to_reference": 0.9999,
+      "batch_individual_absolute_tolerance": 0.002,
+      "required_dimension": 1024
+    },
+    "tolerances_frozen_before_load": true,
+    "rebuild_corpus_with_each_engine": true,
+    "cross_engine_query_corpus_mix": false,
+    "quantized_variants_separate": true,
+    "holdout_retuning": false
+  },
+  "load": {
+    "concurrency": [
+      1,
+      4,
+      8,
+      16,
+      32
+    ],
+    "texts_per_request": [
+      1,
+      8,
+      32
+    ],
+    "warmup_requests": 50,
+    "measurement_seconds": 60,
+    "minimum_attempts_per_cell": 1000,
+    "repetitions": 3,
+    "warmup_excluded": true,
+    "cold_load_separate": true,
+    "retry": false,
+    "timeout_seconds": 30,
+    "percentiles": "successful_request_latency_p50_p95_p99_with_failure_rate_from_all_attempts",
+    "throughput": [
+      "successful_requests_per_wall_second",
+      "successful_texts_per_wall_second"
+    ],
+    "latency_scope": [
+      "client_end_to_end",
+      "server_reported_when_available"
+    ],
+    "verify_response_order": true,
+    "metrics": [
+      "p50_ms",
+      "p95_ms",
+      "p99_ms",
+      "requests_per_sec",
+      "texts_per_sec",
+      "failure_rate",
+      "timeout_rate",
+      "peak_memory_bytes",
+      "peak_vram_bytes",
+      "batching_behavior"
+    ],
+    "cells_are_design_defaults": true
+  },
+  "unsupported_mode": "SKIPPED_UNSUPPORTED_not_zero_throughput",
+  "output_contract": [
+    "manifest",
+    "capability_probe",
+    "parity_report",
+    "load_results",
+    "error_samples"
+  ],
+  "hardware_followup": {
+    "engines": "shortlisted_only",
+    "dtype_and_quantization_axes": "separate",
+    "metrics": [
+      "quality_parity",
+      "latency",
+      "throughput",
+      "memory",
+      "vram",
+      "failure_rate"
+    ],
+    "actual_scope": "separate frozen FP32 SentenceTransformer dense component; one CPU container then one GPU container",
+    "engine_end_to_end_comparison_executed": false,
+    "actual_results": "../outputs/retrieval/run-20261006-v1/hardware/cpu-gpu.json",
+    "actual_profile": {
+      "batches": [
+        1,
+        8,
+        32
+      ],
+      "requests_per_batch": 30,
+      "cpu_threads": 8,
+      "query_count": 60
+    }
+  },
+  "actual_profile": {
+    "lane": "dense_question_embedding_component",
+    "seconds_per_cell": 10,
+    "minimum_attempts": 100,
+    "repetitions": 1,
+    "warmup_requests": 5,
+    "concurrency": [
+      1,
+      4,
+      8,
+      16,
+      32
+    ],
+    "batch": [
+      1,
+      8,
+      32
+    ],
+    "full_design_profile_executed": false,
+    "reranker_end_to_end_measured": false
+  },
+  "measured_serving": {
+    "result": {
+      "scope": "BGE dense question embedding component only",
+      "qualification": "vector cosine_min >= .9999, complete 15-cell sweep, zero errors",
+      "selection_rule": "maximum measured batch=1 throughput among qualified engines",
+      "profile": "exploratory_10s_100_attempts_one_repetition",
+      "engines": [
+        {
+          "engine": "ollama",
+          "qualified_dense_component": false,
+          "parity_status": "drift_detected",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 64.20849147165127,
+          "peak_measured_cell": {
+            "engine": "ollama",
+            "concurrency": 4,
+            "texts_per_request": 1,
+            "wall_seconds": 10.076548836000256,
+            "attempts": 647,
+            "successes": 647,
+            "failures": 0,
+            "failure_rate": 0.0,
+            "p50_ms": 55.64348300003985,
+            "p95_ms": 100.20785540009454,
+            "p99_ms": 119.88327699999866,
+            "requests_per_sec": 64.20849147165127,
+            "texts_per_sec": 64.20849147165127,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        },
+        {
+          "engine": "tei",
+          "qualified_dense_component": true,
+          "parity_status": "passed",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 126.44570627278905,
+          "peak_measured_cell": {
+            "engine": "tei",
+            "concurrency": 4,
+            "texts_per_request": 32,
+            "wall_seconds": 17.77790195100033,
+            "attempts": 100,
+            "successes": 100,
+            "failures": 0,
+            "failure_rate": 0.0,
+            "p50_ms": 661.2443274998441,
+            "p95_ms": 941.7818054500003,
+            "p99_ms": 1057.770678590009,
+            "requests_per_sec": 5.624960711090725,
+            "texts_per_sec": 179.9987427549032,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        },
+        {
+          "engine": "vllm",
+          "qualified_dense_component": true,
+          "parity_status": "passed",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 206.45454306764898,
+          "peak_measured_cell": {
+            "engine": "vllm",
+            "concurrency": 16,
+            "texts_per_request": 32,
+            "wall_seconds": 12.305450495000514,
+            "attempts": 100,
+            "successes": 100,
+            "failures": 0,
+            "failure_rate": 0.0,
+            "p50_ms": 1697.3905195000043,
+            "p95_ms": 2399.791177150655,
+            "p99_ms": 2431.804786579296,
+            "requests_per_sec": 8.126480216277187,
+            "texts_per_sec": 260.04736692087,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        }
+      ],
+      "selected_engine": "vllm",
+      "operational_SLO_not_supplied": true,
+      "reranker_serving_not_measured": true,
+      "production_adoption": false,
+      "NO_FAQ_holdout_gate_failed": true
+    },
+    "all_engines_stopped_after_sweep": true,
+    "shutdown_verification_files": [
+      "serving/ollama/shutdown-verification.json",
+      "serving/tei/shutdown-verification.json",
+      "serving/vllm/shutdown-verification.json"
+    ]
+  },
+  "measurement_limitations": [
+    "one repetition per load cell",
+    "no operational SLO supplied",
+    "model cold load not separately captured by serving client",
+    "server internal batching trace not captured",
+    "reranker and UBot end-to-end latency not measured"
+  ]
+}

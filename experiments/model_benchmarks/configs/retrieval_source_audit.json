@@ -1,0 +1,67 @@
+{
+  "audit_date": "2026-10-06",
+  "audit_scope": "read_only_workbook_values_and_file_hashes",
+  "sources": [
+    {
+      "key": "current_retrieval_base",
+      "path": "C:/Users/eongp/Downloads/FAQ_RAG_3000건_사전Context제거_피드백수정본(1).xlsx",
+      "sha256": "3cbf28303269b7429756f5409cae80a165085bf18c479dc3a77595bcf158076a",
+      "faq_sheet": "FAQ 원문",
+      "faq_count": 1024,
+      "faq_intent_counts": {"FAQ_RAG": 985, "MAP_API": 15, "USER_INFO": 24},
+      "test_sheet": "테스트 3000건",
+      "execution_rows": 3000,
+      "original_question_ids": 2820,
+      "distinct_question_strings": 2208,
+      "execution_mode_counts": {"실제 검색": 2320, "통제 검색": 420, "시험 코퍼스 검색": 260},
+      "retrieval_eligibility_counts": {"예": 1807, "아니오": 923, "조건부": 270},
+      "regular_positive_execution_rows": 1807,
+      "regular_positive_original_question_ids": 1708,
+      "regular_positive_source_scenario_groups": 903,
+      "scenario_groups_are_not_verified_independent_samples": true,
+      "special_condition_records": 238,
+      "special_document_records": 430
+    },
+    {
+      "key": "current_generation_base",
+      "path": "C:/Users/eongp/Downloads/FAQ_RAG_15개항목_각200건_총3000건_피드백수정본(1).xlsx",
+      "sha256": "42df6610538af536356d244979fc30ad028ed8e0397618d32768d80bf8fa8465",
+      "faq_sheet": "FAQ 원문",
+      "faq_count": 1024,
+      "test_sheet": "테스트 3000건",
+      "execution_rows": 3000,
+      "same_faq_values_as_current_retrieval_base": true,
+      "same_execution_ids_and_questions_as_current_retrieval_base": true,
+      "provided_context_is_not_retrieval_input": true
+    },
+    {
+      "key": "legacy_60",
+      "path": "D:/finalproject/embedding/UBot-EmbeddingTest/model_benchmarks/faq/EmbeddingTestFAQ_통합.xlsx",
+      "sha256": "b048550749a67d11abac82c00a5e61c8148b4e016668c2056934ade4556c7272",
+      "faq_sheet": "FAQ",
+      "faq_count": 1000,
+      "all_retrieval_query_rows": 60,
+      "faq_rag_query_rows": 57,
+      "other_route_query_rows": 3,
+      "shared_ids_with_current": 1000,
+      "identical_question_answer_at_shared_id": 100,
+      "different_question_or_answer_at_shared_id": 900
+    },
+    {
+      "key": "legacy_235",
+      "path": "D:/finalproject/embedding/UBot-EmbeddingTest/reranker/faq/EmbeddingTestFAQ_통합.xlsx",
+      "sha256": "645392db7c111082d1bd1845dc55a5ebff8514fc70c4a7dc47866e3a56691107",
+      "faq_sheet": "FAQ",
+      "faq_count": 1000,
+      "all_retrieval_query_rows": 238,
+      "faq_rag_query_rows": 235,
+      "expanded_query_rows": 178,
+      "other_route_query_rows": 3,
+      "shared_ids_with_current": 1000,
+      "identical_question_answer_at_shared_id": 100,
+      "different_question_or_answer_at_shared_id": 900
+    }
+  ],
+  "past_result_corpus_hash_available": false,
+  "model_or_llm_executed_for_this_audit": false
+}

@@ -1,0 +1,201 @@
+{
+  "schema_version": 3,
+  "dataset_ids": [
+    "existing",
+    "kt",
+    "skt",
+    "lgu"
+  ],
+  "datasets": {
+    "existing": {
+      "brand": null,
+      "faq_count": 1024,
+      "question_count": 331,
+      "faq_pairs": "datasets/existing/faq_pairs.jsonl",
+      "user_questions": "datasets/existing/user_questions.jsonl",
+      "corpus_sha256": "06e47f669da09ec9bcc667b0e9774047640c62e59244b2d1e80eec56465db807",
+      "questions_sha256": "52173b071d04a71f6cae073128c947f0522a032958c41147d91f4720dbe4aa6c",
+      "split_counts": {
+        "holdout": 91,
+        "development": 155,
+        "calibration": 85
+      },
+      "purpose_counts": {
+        "NEGATION": 20,
+        "CONDITION_SCOPE": 21,
+        "PARAPHRASE": 31,
+        "NUMERIC_CONDITION": 30,
+        "EXACT_ENTITY": 7,
+        "COMPARISON": 8,
+        "KR_EN_EQUIVALENT": 34,
+        "TYPO": 17,
+        "LONG_QUERY": 17,
+        "MULTI_INTENT": 17,
+        "NO_FAQ": 68,
+        "PARTIAL": 17,
+        "AMBIGUOUS_QUERY": 17,
+        "CONTEXT_RETRIEVAL": 17,
+        "HARD_NEGATIVE": 10
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 229,
+        "NO_FAQ": 68,
+        "PARTIAL_FACTS_EXIST": 17,
+        "UNDERSPECIFIED": 17
+      },
+      "language_counts": {
+        "ko": 263,
+        "en": 34,
+        "ko-en": 34
+      },
+      "leakage_group_count": 90,
+      "authored_base_question_count": 0,
+      "covered_source_faqs": 101,
+      "multi_answer_questions": 84
+    },
+    "kt": {
+      "brand": "KT",
+      "faq_count": 1099,
+      "question_count": 745,
+      "faq_pairs": "datasets/kt/faq_pairs.jsonl",
+      "user_questions": "datasets/kt/user_questions.jsonl",
+      "corpus_sha256": "4c411e0b1b6a265c51ba077afde8177b3d5582c4a67883a1c122c830da62a759",
+      "questions_sha256": "dfa0050b0b3feb04b3a5b9d9a7e4a22fb473f1470d3516b7fa41d92f169aeb5b",
+      "split_counts": {
+        "development": 373,
+        "calibration": 186,
+        "holdout": 186
+      },
+      "purpose_counts": {
+        "NEGATION": 93,
+        "CONDITION_SCOPE": 167,
+        "EXACT_ENTITY": 79,
+        "NUMERIC_CONDITION": 134,
+        "PARAPHRASE": 119,
+        "COMPARISON": 15,
+        "HARD_NEGATIVE": 5,
+        "KR_EN_EQUIVALENT": 70,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 13,
+        "NO_FAQ": 10,
+        "PARTIAL": 5,
+        "AMBIGUOUS_QUERY": 5
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 725,
+        "NO_FAQ": 10,
+        "PARTIAL_FACTS_EXIST": 5,
+        "UNDERSPECIFIED": 5
+      },
+      "language_counts": {
+        "ko": 675,
+        "en": 35,
+        "ko-en": 35
+      },
+      "leakage_group_count": 94,
+      "authored_base_question_count": 610,
+      "covered_source_faqs": 434,
+      "multi_answer_questions": 55
+    },
+    "skt": {
+      "brand": "SKT",
+      "faq_count": 1305,
+      "question_count": 598,
+      "faq_pairs": "datasets/skt/faq_pairs.jsonl",
+      "user_questions": "datasets/skt/user_questions.jsonl",
+      "corpus_sha256": "49e701643d8677142148db2406df1446a2fde240d445736fb9383ff0fb6c38be",
+      "questions_sha256": "03b50bfa6a680c8085617df58b38034440039ac5a80b3788d7c27783f6d44961",
+      "split_counts": {
+        "holdout": 149,
+        "calibration": 150,
+        "development": 299
+      },
+      "purpose_counts": {
+        "CONDITION_SCOPE": 129,
+        "NUMERIC_CONDITION": 86,
+        "EXACT_ENTITY": 52,
+        "NEGATION": 103,
+        "PARAPHRASE": 59,
+        "COMPARISON": 30,
+        "HARD_NEGATIVE": 5,
+        "KR_EN_EQUIVALENT": 70,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 14,
+        "NO_FAQ": 10,
+        "PARTIAL": 5,
+        "AMBIGUOUS_QUERY": 5
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 578,
+        "NO_FAQ": 10,
+        "PARTIAL_FACTS_EXIST": 5,
+        "UNDERSPECIFIED": 5
+      },
+      "language_counts": {
+        "ko": 528,
+        "en": 35,
+        "ko-en": 35
+      },
+      "leakage_group_count": 70,
+      "authored_base_question_count": 463,
+      "covered_source_faqs": 392,
+      "multi_answer_questions": 47
+    },
+    "lgu": {
+      "brand": "LG U+",
+      "faq_count": 131,
+      "question_count": 168,
+      "faq_pairs": "datasets/lgu/faq_pairs.jsonl",
+      "user_questions": "datasets/lgu/user_questions.jsonl",
+      "corpus_sha256": "2e2e47ed792dba523899cf9ac3ed3c68cf2ee7e769788eefeecb95114a748a08",
+      "questions_sha256": "77af7c5691e82cae6585598e6df1e8585ed03da3ac4b758cd4ba4c4020f39519",
+      "split_counts": {
+        "development": 114,
+        "calibration": 40,
+        "holdout": 14
+      },
+      "purpose_counts": {
+        "CONDITION_SCOPE": 14,
+        "NEGATION": 11,
+        "NUMERIC_CONDITION": 12,
+        "EXACT_ENTITY": 17,
+        "PARAPHRASE": 16,
+        "COMPARISON": 11,
+        "HARD_NEGATIVE": 5,
+        "KR_EN_EQUIVALENT": 20,
+        "TYPO": 10,
+        "LONG_QUERY": 10,
+        "CONTEXT_RETRIEVAL": 10,
+        "MULTI_INTENT": 12,
+        "NO_FAQ": 10,
+        "PARTIAL": 5,
+        "AMBIGUOUS_QUERY": 5
+      },
+      "status_counts": {
+        "FAQ_EXISTS": 148,
+        "NO_FAQ": 10,
+        "PARTIAL_FACTS_EXIST": 5,
+        "UNDERSPECIFIED": 5
+      },
+      "language_counts": {
+        "ko": 148,
+        "en": 10,
+        "ko-en": 10
+      },
+      "leakage_group_count": 11,
+      "authored_base_question_count": 83,
+      "covered_source_faqs": 72,
+      "multi_answer_questions": 142
+    }
+  },
+  "scope_rule": "Select one dataset BEFORE embedding. Never embed a pooled four-dataset corpus.",
+  "source_snapshot_sha256": "76d867e4b4e183e6b52c8edfb31ec7da4e74f8495b4a2a2ce10fb2472ecf8a2d",
+  "independent_review_status": "pending",
+  "serving_runs_performed": false,
+  "threshold_fitting_ready": false,
+  "reason": "Provisional new absence labels and alternate-answer recall require independent review."
+}

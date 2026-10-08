@@ -1,0 +1,8 @@
+FROM vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+USER root
+COPY docker/requirements-benchmark.lock /tmp/requirements.lock
+# All changed/new distributions versus the immutable base image are pinned.
+RUN /usr/bin/python3 -m pip install --no-cache-dir --no-deps -r /tmp/requirements.lock
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HF_HOME=/models/hf TOKENIZERS_PARALLELISM=false HF_HUB_DISABLE_TELEMETRY=1
+WORKDIR /workspace/serving_test
+ENTRYPOINT ["/usr/bin/python3"]

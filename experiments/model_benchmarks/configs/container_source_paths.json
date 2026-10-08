@@ -1,0 +1,6 @@
+{
+  "current_retrieval_base": "/sources/retrieval-base.xlsx",
+  "current_generation_base": "/sources/generation-base.xlsx",
+  "legacy_60": "/legacy/model_benchmarks/faq/EmbeddingTestFAQ_통합.xlsx",
+  "legacy_235": "/legacy/reranker/faq/EmbeddingTestFAQ_통합.xlsx"
+}

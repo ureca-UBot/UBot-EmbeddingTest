@@ -1,0 +1,988 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ubot:retrieval-case:v2",
+  "title": "UBot retrieval evaluation case v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "dataset_version",
+    "corpus_version",
+    "family_id",
+    "split_group_id",
+    "split",
+    "track",
+    "primary_type",
+    "tags",
+    "source",
+    "query",
+    "history",
+    "query_mode",
+    "answerability",
+    "expected_routes",
+    "fact_groups",
+    "hard_negative_ids",
+    "annotation",
+    "reporting_cohort",
+    "retrieval_status",
+    "expected_generation_status"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpus_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_group_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "enum": [
+        "calibration",
+        "holdout",
+        "regression",
+        "design_only"
+      ]
+    },
+    "track": {
+      "enum": [
+        "core",
+        "contextual",
+        "no_faq",
+        "special",
+        "repeat",
+        "clarify"
+      ]
+    },
+    "primary_type": {
+      "enum": [
+        "REAL_FAILURE",
+        "EXACT_ENTITY",
+        "HARD_NEGATIVE",
+        "KR_EN_EQUIVALENT",
+        "PARAPHRASE",
+        "LONG_QUERY",
+        "TYPO",
+        "NO_FAQ",
+        "NEGATION",
+        "CONDITION_SCOPE",
+        "NUMERIC_CONDITION",
+        "COMPARISON",
+        "MULTI_INTENT",
+        "AMBIGUOUS_QUERY",
+        "TEMPORAL_VERSION",
+        "DOCUMENT_ATTACK",
+        "STANDARD"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "REAL_FAILURE",
+          "EXACT_ENTITY",
+          "HARD_NEGATIVE",
+          "KR_EN_EQUIVALENT",
+          "PARAPHRASE",
+          "LONG_QUERY",
+          "TYPO",
+          "NO_FAQ",
+          "NEGATION",
+          "CONDITION_SCOPE",
+          "NUMERIC_CONDITION",
+          "COMPARISON",
+          "MULTI_INTENT",
+          "AMBIGUOUS_QUERY",
+          "TEMPORAL_VERSION",
+          "DOCUMENT_ATTACK",
+          "MULTI_FACT",
+          "CONDITION",
+          "CROSS_INTENT",
+          "CONTEXTUAL",
+          "COUNTERFACT",
+          "STANDARD"
+        ]
+      }
+    },
+    "semantic_pair_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language_variant": {
+      "enum": [
+        "ko_anchor",
+        "en_term",
+        "mixed_terms",
+        "en_sentence"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "source_key",
+        "execution_id",
+        "scenario_group",
+        "category",
+        "service_log_ref"
+      ],
+      "properties": {
+        "origin": {
+          "enum": [
+            "workbook",
+            "legacy",
+            "authored",
+            "service_failure"
+          ]
+        },
+        "source_key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sheet": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "row": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "execution_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "original_question_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scenario_group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "service_log_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "query": {
+      "type": "string",
+      "minLength": 1
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "query_mode": {
+      "enum": [
+        "standalone",
+        "frozen_contextual_rewrite",
+        "clarify_required"
+      ]
+    },
+    "answerability": {
+      "enum": [
+        "full",
+        "partial",
+        "none",
+        "route_only",
+        "ambiguous"
+      ]
+    },
+    "expected_routes": {
+      "type": "array",
+      "minItems": 0,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "FAQ_RAG",
+          "MAP_API",
+          "USER_INFO",
+          "USER_INFO_API",
+          "PLAN_CHANGE_API",
+          "OUT_OF_SCOPE"
+        ]
+      }
+    },
+    "execution_condition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "group_id",
+        "index",
+        "total"
+      ],
+      "properties": {
+        "group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "fact_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fact_id",
+          "requirement",
+          "primary_ids",
+          "acceptable_ids"
+        ],
+        "properties": {
+          "fact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "primary_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/faqId"
+            }
+          },
+          "acceptable_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/$defs/faqId"
+            }
+          }
+        }
+      }
+    },
+    "hard_negative_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/faqId"
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reviewer",
+        "rationale"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "approved",
+            "ambiguous",
+            "design_example"
+          ]
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "difficulty": {
+          "enum": [
+            "Easy",
+            "Medium",
+            "Hard"
+          ]
+        }
+      }
+    },
+    "reporting_cohort": {
+      "enum": [
+        "core_general",
+        "targeted_condition",
+        "contextual",
+        "no_faq",
+        "clarify",
+        "special_corpus",
+        "repeat"
+      ]
+    },
+    "retrieval_status": {
+      "enum": [
+        "FAQ_EXISTS",
+        "PARTIAL_FACTS_EXIST",
+        "NO_FAQ",
+        "UNDETERMINED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "expected_generation_status": {
+      "enum": [
+        "ANSWER",
+        "PARTIAL",
+        "ABSTAIN",
+        "CLARIFY",
+        "ROUTE",
+        "NOT_EVALUATED"
+      ]
+    },
+    "meaning_constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "numbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "operators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "contrast_pair_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contrast_axis": {
+      "enum": [
+        "polarity",
+        "condition_scope",
+        "numeric_boundary",
+        "temporal_as_of"
+      ]
+    },
+    "subrequests": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "request_id",
+          "route",
+          "requirement",
+          "retrieval_fact_ids",
+          "external_action_required"
+        ],
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "route": {
+            "enum": [
+              "FAQ_RAG",
+              "MAP_API",
+              "USER_INFO",
+              "USER_INFO_API",
+              "PLAN_CHANGE_API",
+              "OUT_OF_SCOPE"
+            ]
+          },
+          "requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retrieval_fact_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "external_action_required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "temporal_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "as_of",
+        "versions",
+        "expected_policy_ids"
+      ],
+      "properties": {
+        "as_of": {
+          "type": "string",
+          "minLength": 1
+        },
+        "versions": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "faq_id",
+              "valid_from",
+              "valid_until"
+            ],
+            "properties": {
+              "faq_id": {
+                "$ref": "#/$defs/faqId"
+              },
+              "valid_from": {
+                "type": "string",
+                "minLength": 1
+              },
+              "valid_until": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "expected_policy_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/faqId"
+          }
+        }
+      }
+    },
+    "attack_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fixture_document_ids",
+        "base_faq_ids",
+        "exposure_required"
+      ],
+      "properties": {
+        "fixture_document_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/faqId"
+          }
+        },
+        "base_faq_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/faqId"
+          }
+        },
+        "exposure_required": {
+          "const": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "faqId": {
+      "type": "string",
+      "pattern": "^(FAQ-[0-9]{3,4}|TEST-[A-Za-z0-9_-]+)$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "const": "repeat"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "repeat"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "const": "special"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "execution_condition_id"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "query_mode": {
+            "const": "frozen_contextual_rewrite"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "track": {
+            "enum": [
+              "contextual",
+              "repeat"
+            ]
+          },
+          "history": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tags": {
+            "contains": {
+              "const": "KR_EN_EQUIVALENT"
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "semantic_pair_id",
+          "language_variant"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "enum": [
+              "full",
+              "partial"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fact_groups": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "enum": [
+              "none",
+              "route_only",
+              "ambiguous"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "fact_groups": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tags": {
+            "contains": {
+              "const": "REAL_FAILURE"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "origin": {
+                "const": "service_failure"
+              },
+              "service_log_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annotation": {
+            "properties": {
+              "status": {
+                "const": "approved"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "annotation": {
+            "properties": {
+              "reviewer": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "annotation": {
+            "properties": {
+              "status": {
+                "const": "design_example"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "split": {
+            "const": "design_only"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "const": "no_faq"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "answerability": {
+            "const": "none"
+          },
+          "tags": {
+            "contains": {
+              "const": "NO_FAQ"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "full"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retrieval_status": {
+            "const": "FAQ_EXISTS"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "partial"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retrieval_status": {
+            "const": "PARTIAL_FACTS_EXIST"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "none"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retrieval_status": {
+            "const": "NO_FAQ"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "route_only"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retrieval_status": {
+            "const": "NOT_APPLICABLE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "ambiguous"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "retrieval_status": {
+            "const": "UNDETERMINED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "const": "ambiguous"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "track": {
+            "const": "clarify"
+          },
+          "reporting_cohort": {
+            "const": "clarify"
+          },
+          "query_mode": {
+            "const": "clarify_required"
+          },
+          "expected_generation_status": {
+            "const": "CLARIFY"
+          },
+          "expected_routes": {
+            "maxItems": 0
+          },
+          "history": {
+            "maxItems": 0
+          },
+          "tags": {
+            "contains": {
+              "const": "AMBIGUOUS_QUERY"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "answerability": {
+            "enum": [
+              "full",
+              "partial",
+              "none",
+              "route_only"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "expected_routes": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tags": {
+            "contains": {
+              "const": "MULTI_INTENT"
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "subrequests"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tags": {
+            "contains": {
+              "const": "TEMPORAL_VERSION"
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "temporal_context",
+          "execution_condition_id"
+        ],
+        "properties": {
+          "track": {
+            "const": "special"
+          },
+          "reporting_cohort": {
+            "const": "special_corpus"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tags": {
+            "contains": {
+              "const": "DOCUMENT_ATTACK"
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "attack_context",
+          "execution_condition_id"
+        ],
+        "properties": {
+          "track": {
+            "const": "special"
+          },
+          "reporting_cohort": {
+            "const": "special_corpus"
+          }
+        }
+      }
+    }
+  ]
+}
