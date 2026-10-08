@@ -1,0 +1,144 @@
+{
+  "source_commit": "8ad2aab49095ad2efd8387a649d4d5fd1d76533f",
+  "source_path": "experiments/model_benchmarks/configs/serving_engine_plan.json",
+  "model_id": "BAAI/bge-m3",
+  "model_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+  "engines": [
+    {
+      "id": "Ollama",
+      "version": "0.35.0",
+      "artifact_format": "GGUF_F16",
+      "quantization": "F16",
+      "parity_status": "drift_detected",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    },
+    {
+      "id": "TEI",
+      "version": "1.9.4",
+      "artifact_format": "HF_safetensors_float32_CLS_512",
+      "quantization": "none",
+      "parity_status": "passed",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    },
+    {
+      "id": "vLLM",
+      "version": "0.30.0",
+      "artifact_format": "HF_safetensors_float32_CLS_512",
+      "quantization": "none",
+      "parity_status": "passed",
+      "load_status": "completed_15_cells",
+      "total_failures": 0
+    }
+  ],
+  "measured_serving": {
+    "result": {
+      "scope": "BGE dense question embedding component only",
+      "qualification": "vector cosine_min >= .9999, complete 15-cell sweep, zero errors",
+      "selection_rule": "maximum measured batch=1 throughput among qualified engines",
+      "profile": "exploratory_10s_100_attempts_one_repetition",
+      "engines": [
+        {
+          "engine": "ollama",
+          "qualified_dense_component": false,
+          "parity_status": "drift_detected",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 64.20849147165127,
+          "peak_measured_cell": {
+            "engine": "ollama",
+            "concurrency": 4,
+            "texts_per_request": 1,
+            "wall_seconds": 10.076548836000256,
+            "attempts": 647,
+            "successes": 647,
+            "failures": 0,
+            "failure_rate": 0,
+            "p50_ms": 55.64348300003985,
+            "p95_ms": 100.20785540009454,
+            "p99_ms": 119.88327699999866,
+            "requests_per_sec": 64.20849147165127,
+            "texts_per_sec": 64.20849147165127,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        },
+        {
+          "engine": "tei",
+          "qualified_dense_component": true,
+          "parity_status": "passed",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 126.44570627278905,
+          "peak_measured_cell": {
+            "engine": "tei",
+            "concurrency": 4,
+            "texts_per_request": 32,
+            "wall_seconds": 17.77790195100033,
+            "attempts": 100,
+            "successes": 100,
+            "failures": 0,
+            "failure_rate": 0,
+            "p50_ms": 661.2443274998441,
+            "p95_ms": 941.7818054500003,
+            "p99_ms": 1057.770678590009,
+            "requests_per_sec": 5.624960711090725,
+            "texts_per_sec": 179.9987427549032,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        },
+        {
+          "engine": "vllm",
+          "qualified_dense_component": true,
+          "parity_status": "passed",
+          "completed_cells": 15,
+          "total_failures": 0,
+          "best_batch1_texts_per_second": 206.45454306764898,
+          "peak_measured_cell": {
+            "engine": "vllm",
+            "concurrency": 16,
+            "texts_per_request": 32,
+            "wall_seconds": 12.305450495000514,
+            "attempts": 100,
+            "successes": 100,
+            "failures": 0,
+            "failure_rate": 0,
+            "p50_ms": 1697.3905195000043,
+            "p95_ms": 2399.791177150655,
+            "p99_ms": 2431.804786579296,
+            "requests_per_sec": 8.126480216277187,
+            "texts_per_sec": 260.04736692087,
+            "error_samples": [],
+            "retries": 0,
+            "profile": "exploratory_10s_100_attempts_one_repetition"
+          },
+          "production_adoption": false
+        }
+      ],
+      "selected_engine": "vllm",
+      "operational_SLO_not_supplied": true,
+      "reranker_serving_not_measured": true,
+      "production_adoption": false,
+      "NO_FAQ_holdout_gate_failed": true
+    },
+    "all_engines_stopped_after_sweep": true,
+    "shutdown_verification_files": [
+      "serving/ollama/shutdown-verification.json",
+      "serving/tei/shutdown-verification.json",
+      "serving/vllm/shutdown-verification.json"
+    ]
+  },
+  "measurement_limitations": [
+    "one repetition per load cell",
+    "no operational SLO supplied",
+    "model cold load not separately captured by serving client",
+    "server internal batching trace not captured",
+    "reranker and UBot end-to-end latency not measured"
+  ]
+}
