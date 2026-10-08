@@ -1,0 +1,5 @@
+# Local audit records and backups only.
+/.private/
+
+# Follow-up data exclusions are scoped in experiments/.gitignore.
+# Original comparison files keep their contents and Git tracking.

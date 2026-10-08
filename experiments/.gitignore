@@ -1,0 +1,65 @@
+# Follow-up experiments only: code, methods and reviewed aggregate results.
+# Private data stays at its existing runtime path. Parent comparison folders are unaffected.
+*
+!*/
+!*.py
+!*.ps1
+!*.java
+!*.mjs
+!*.md
+!*.yaml
+!*.yml
+!Dockerfile*
+!requirements*.txt
+!requirements*.lock
+!.gitignore
+!.gitattributes
+!.dockerignore
+!.env.example
+
+# Runtime configuration and schemas, not question/answer records.
+!**/configs/*.json
+!**/schemas/*.json
+!**/manifest.json
+!**/evaluation_contract.json
+!**/environment/*.json
+!**/PACKAGE_CONTENTS.json
+!**/PACKAGE_VALIDATION.json
+
+# No corpus, generated evaluation rows, source snapshots or review exports.
+**/faq/
+**/data/
+**/datasets/
+**/source/
+**/sources/
+**/authoring/
+**/review/
+**/exports/
+**/outputs/**
+!**/outputs/**/
+**/cache/
+**/runtime/
+**/_verification/
+**/qa/
+**/node_modules/
+**/__pycache__/
+**/.pytest_cache/
+**/.venv/
+**/.private/
+.env
+.env.*
+!.env.example
+
+# Authored question banks embedded in source files remain private as well.
+/readme_benchmark/scripts/author_readme_seedbook.py
+/readme_benchmark/readme_serving_retest/fair_eval_v2/fact_spec.py
+
+# Explicit public exports: aggregate numbers and FAQ ID/source URL only.
+!/public_results/aggregate_metrics.json
+!/public_results/load_metrics.json
+!/public_results/faq_sources.json
+!/publication/policy.json
+
+# This archive contains code/environment only, never the private dataset ZIP.
+!/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.zip
+!/readme_benchmark/readme_serving_retest/fair_eval_v4/distribution/UBot_v4_실행코드_환경.sha256

@@ -1,0 +1,6 @@
+FROM vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+USER root
+RUN /usr/bin/python3 -m pip install --no-cache-dir sentence-transformers==6.1.0 FlagEmbedding==1.4.2 openpyxl==3.1.5 jsonschema==4.26.0 psutil==7.2.2
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HF_HOME=/models/hf TOKENIZERS_PARALLELISM=false HF_HUB_DISABLE_TELEMETRY=1
+WORKDIR /workspace
+ENTRYPOINT ["/usr/bin/python3"]

@@ -1,0 +1,67 @@
+name: ubot-faqs-engine-5000
+x-runtime: &runtime
+  image: ubot-retrieval-benchmark:run-v1
+  working_dir: /workspace
+  read_only: true
+  network_mode: none
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs: ['/tmp:size=1g']
+  environment:
+    HF_HOME: /models/hf
+    HF_MODULES_CACHE: /tmp/hf_modules
+    HF_HUB_OFFLINE: '1'
+    TRANSFORMERS_OFFLINE: '1'
+    PYTHONDONTWRITEBYTECODE: '1'
+    PYTHONUNBUFFERED: '1'
+    TOKENIZERS_PARALLELISM: 'false'
+  volumes:
+    - .:/workspace:ro
+    - ./outputs:/workspace/outputs:rw
+    - hf-models:/models/hf:ro
+  shm_size: 2gb
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+services:
+  validate:
+    <<: *runtime
+    profiles: [validation]
+  worker:
+    <<: [*runtime, *gpu]
+    profiles: [matrix]
+    network_mode: bridge
+  jina-worker:
+    <<: [*runtime, *gpu]
+    profiles: [matrix]
+    image: ubot-retrieval-jina:run-v1
+  ollama:
+    <<: *gpu
+    image: ollama/ollama:0.35.0@sha256:2a6e883b917fc543389599dae79918f5cac9e1438890506982f44aa4f5625d01
+    profiles: [ollama]
+    ports: ['127.0.0.1:11435:11434']
+    volumes: [ollama-models:/root/.ollama]
+    environment: {OLLAMA_CONTEXT_LENGTH: '8192'}
+  vllm:
+    <<: *gpu
+    image: vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+    profiles: [vllm]
+    ports: ['127.0.0.1:8001:8000']
+    volumes: [hf-models:/models/hf:ro, hf-runtime:/root/.cache/huggingface]
+    shm_size: 2gb
+    command: [--model, /models/hf/serving-bge-m3, --served-model-name, BAAI/bge-m3, --runner, pooling, --hf-overrides, '{"architectures":["BgeM3EmbeddingModel"]}', --pooler-config.task, embed, --dtype, float32, --max-model-len, '8192', --gpu-memory-utilization, '0.5', --enforce-eager, --max-num-batched-tokens, '8192']
+volumes:
+  hf-models:
+    external: true
+    name: ubot-retrieval-benchmark_hf-benchmark-cache
+  ollama-models:
+    external: true
+    name: ubot-retrieval-benchmark_ollama-cache
+  hf-runtime:
+    external: true
+    name: ubot-readme-benchmark_hf-runtime

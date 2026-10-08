@@ -1,0 +1,79 @@
+name: ubot-v4-runtime
+x-runtime: &runtime
+  image: ubot-v4-benchmark:runtime
+  working_dir: /workspace/serving_test
+  read_only: true
+  network_mode: bridge
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs: ['/tmp:size=2g']
+  environment:
+    HF_HOME: /models/hf
+    HF_MODULES_CACHE: /tmp/hf_modules
+    HF_HUB_OFFLINE: '1'
+    TRANSFORMERS_OFFLINE: '1'
+    PYTHONDONTWRITEBYTECODE: '1'
+    PYTHONUNBUFFERED: '1'
+    TOKENIZERS_PARALLELISM: 'false'
+  volumes:
+    - ..:/workspace:ro
+    - ./outputs:/workspace/serving_test/outputs:rw
+    - hf-models:/models/hf:ro
+  shm_size: 2gb
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+services:
+  validate:
+    <<: *runtime
+  worker:
+    <<: [*runtime, *gpu]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.benchmark
+  jina-worker:
+    <<: [*runtime, *gpu]
+    image: ubot-v4-jina:runtime
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.jina
+  model-setup:
+    <<: *runtime
+    profiles: [setup]
+    environment:
+      HF_HOME: /models/hf
+      HF_MODULES_CACHE: /tmp/hf_modules
+      HF_HUB_OFFLINE: '0'
+      TRANSFORMERS_OFFLINE: '0'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONUNBUFFERED: '1'
+    volumes:
+      - ..:/workspace:ro
+      - hf-models:/models/hf:rw
+    command: [/workspace/scripts/prepare_models.py]
+  ollama:
+    <<: *gpu
+    image: ollama/ollama:0.35.0@sha256:2a6e883b917fc543389599dae79918f5cac9e1438890506982f44aa4f5625d01
+    ports: ['127.0.0.1:11436:11434']
+    volumes: [ollama-models:/root/.ollama]
+    environment: {OLLAMA_CONTEXT_LENGTH: '8192'}
+  vllm:
+    <<: *gpu
+    image: vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+    ports: ['127.0.0.1:8002:8000']
+    volumes: [hf-models:/models/hf:ro, hf-runtime:/root/.cache/huggingface]
+    shm_size: 2gb
+    command: [--model, /models/hf/serving-bge-m3, --served-model-name, BAAI/bge-m3, --runner, pooling, --hf-overrides, '{"architectures":["BgeM3EmbeddingModel"]}', --pooler-config.task, embed, --dtype, float16, --max-model-len, '8192', --gpu-memory-utilization, '0.5', --enforce-eager, --max-num-batched-tokens, '8192']
+volumes:
+  hf-models:
+    name: ${HF_MODELS_VOLUME:-ubot-v4-runtime-hf-models}
+  ollama-models:
+    name: ${OLLAMA_MODELS_VOLUME:-ubot-v4-runtime-ollama-models}
+  hf-runtime:
+    name: ${HF_RUNTIME_VOLUME:-ubot-v4-runtime-hf-runtime}

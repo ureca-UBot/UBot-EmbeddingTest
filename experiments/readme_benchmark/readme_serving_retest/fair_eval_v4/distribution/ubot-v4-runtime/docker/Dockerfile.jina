@@ -1,0 +1,4 @@
+FROM ubot-v4-benchmark:runtime
+# Separate compatibility image for the pinned Jina remote implementation.
+COPY docker/requirements-jina.lock /tmp/requirements-jina.lock
+RUN /usr/bin/python3 -m pip install --no-cache-dir --no-deps -r /tmp/requirements-jina.lock

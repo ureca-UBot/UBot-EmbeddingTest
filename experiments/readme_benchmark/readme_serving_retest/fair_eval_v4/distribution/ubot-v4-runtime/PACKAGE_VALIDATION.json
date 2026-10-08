@@ -1,0 +1,45 @@
+{
+  "validated_at": "2026-10-07T03:18:31.839987+00:00",
+  "python_syntax": true,
+  "powershell_syntax": true,
+  "compose_config": true,
+  "unchanged_original_files": [
+    "dataset.py",
+    "manifest.json",
+    "evaluation_contract.json",
+    "serving_test/common_v4.py",
+    "serving_test/run_native.py",
+    "serving_test/run_rerank.py",
+    "serving_test/run_v4.py",
+    "serving_test/inspect_log.py",
+    "serving_test/test_runner.py",
+    "serving_test/test_native_math.py"
+  ],
+  "comparison_evaluation_ast_unchanged": true,
+  "packaging_changes": [
+    "Docker image tags/build recipes, project/volume scope",
+    "Preparation/import/run/stop entrypoints",
+    "Historical incident report prose"
+  ],
+  "isolated_dataset_import": {
+    "jsonl_files": 8,
+    "original_fixture_files_reproduced": 8,
+    "questions": 1918,
+    "all_hashes_match": true,
+    "reject_bad_input_without_writes": true
+  },
+  "docker_environment_versions": {
+    "benchmark_packages_checked": 284,
+    "jina_packages_checked": 284,
+    "differences": 0
+  },
+  "runner_tests_passed": 5,
+  "native_tokenizer_math_tests_passed": 3,
+  "four_dataset_preflight_passed": true,
+  "bge_serving_weight_tensors_equal": 391,
+  "serving_safetensors_sha256": "993b2248881724788dcab8c644a91dfd63584b6e5604ff2037cb5541e1e38e7e",
+  "fresh_network_download_tested": false,
+  "fresh_docker_image_build_tested": false,
+  "full_gpu_benchmark_rerun": false,
+  "validation_environment": "Isolated extracted-layout copy, original pinned images, read-only model volume, CPU containers with network disabled"
+}

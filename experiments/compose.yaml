@@ -1,0 +1,145 @@
+name: ubot-retrieval-benchmark
+
+x-gpu: &gpu
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]
+
+x-validator: &validator
+  image: ubot-retrieval-validation:design-v2
+  build:
+    context: .
+    dockerfile: docker/Dockerfile.validation
+  working_dir: /workspace
+  environment:
+    PYTHONDONTWRITEBYTECODE: "1"
+  volumes:
+    - .:/workspace:ro
+    - ../model_benchmarks:/legacy/model_benchmarks:ro
+    - ../reranker:/legacy/reranker:ro
+    - ./model_benchmarks/outputs/retrieval:/reports
+    - type: bind
+      source: ${UBOT_RETRIEVAL_XLSX:-C:/Users/eongp/Downloads/FAQ_RAG_3000건_사전Context제거_피드백수정본(1).xlsx}
+      target: /sources/retrieval-base.xlsx
+      read_only: true
+    - type: bind
+      source: ${UBOT_GENERATION_XLSX:-C:/Users/eongp/Downloads/FAQ_RAG_15개항목_각200건_총3000건_피드백수정본(1).xlsx}
+      target: /sources/generation-base.xlsx
+      read_only: true
+
+services:
+  hardware-cpu:
+    image: ubot-retrieval-benchmark:run-v1
+    profiles: [hardware]
+    working_dir: /workspace
+    environment:
+      CUDA_VISIBLE_DEVICES: ""
+    volumes:
+      - .:/workspace:ro
+      - ./model_benchmarks/outputs/retrieval/run-20261006-v1:/workspace/model_benchmarks/outputs/retrieval/run-20261006-v1
+      - hf-benchmark-cache:/models/hf:ro
+    command: [model_benchmarks/scripts/benchmark_cpu_gpu.py, --device, cpu]
+
+  jina-benchmark:
+    <<: *gpu
+    image: ubot-retrieval-jina:run-v1
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.jina
+    profiles: [quality]
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs: [/tmp:size=1g]
+    environment:
+      HF_HOME: /models/hf
+      HF_MODULES_CACHE: /tmp/hf_modules
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./model_benchmarks/scripts:/workspace/model_benchmarks/scripts:ro
+      - ./model_benchmarks/faq/retrieval_run_v2:/workspace/model_benchmarks/faq/retrieval_run_v2:ro
+      - ./model_benchmarks/schemas:/workspace/model_benchmarks/schemas:ro
+      - ./model_benchmarks/configs:/workspace/model_benchmarks/configs:ro
+      - ./model_benchmarks/outputs/retrieval/run-20261006-v1:/workspace/model_benchmarks/outputs/retrieval/run-20261006-v1
+      - hf-benchmark-cache:/models/hf:ro
+    shm_size: 2gb
+    command: [model_benchmarks/scripts/run_retrieval_benchmark.py, D, --reranker, jina]
+
+  benchmark:
+    <<: *gpu
+    image: ubot-retrieval-benchmark:run-v1
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.benchmark
+    profiles: [quality]
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - ../model_benchmarks:/legacy/model_benchmarks:ro
+      - ../reranker:/legacy/reranker:ro
+      - hf-benchmark-cache:/models/hf
+      - type: bind
+        source: ${UBOT_RETRIEVAL_XLSX:-C:/Users/eongp/Downloads/FAQ_RAG_3000건_사전Context제거_피드백수정본(1).xlsx}
+        target: /sources/retrieval-base.xlsx
+        read_only: true
+      - type: bind
+        source: ${UBOT_GENERATION_XLSX:-C:/Users/eongp/Downloads/FAQ_RAG_15개항목_각200건_총3000건_피드백수정본(1).xlsx}
+        target: /sources/generation-base.xlsx
+        read_only: true
+    shm_size: 2gb
+    command: [model_benchmarks/scripts/run_retrieval_benchmark.py, --help]
+
+  validate:
+    <<: *validator
+    profiles: [validation]
+    command: [python, model_benchmarks/scripts/validate_retrieval_dataset.py, --allow-design-examples, --source-map, model_benchmarks/configs/container_source_paths.json, --report, /reports/design-v2-validation.json]
+
+  unit-tests:
+    <<: *validator
+    profiles: [validation]
+    command: [python, -m, unittest, discover, -s, model_benchmarks/tests, -v]
+
+  gpu-check:
+    <<: *gpu
+    image: nvidia/cuda:12.4.0-base-ubuntu22.04@sha256:80d4d9ac041242f6ae5d05f9be262b3374e0e0b8bb5a49c6c3e94e192cde4a44
+    profiles: [diagnostics]
+    command: [nvidia-smi, "--query-gpu=name,memory.total,driver_version", "--format=csv,noheader"]
+
+  ollama:
+    <<: *gpu
+    image: ollama/ollama:0.35.0@sha256:2a6e883b917fc543389599dae79918f5cac9e1438890506982f44aa4f5625d01
+    profiles: [ollama]
+    ports: ["127.0.0.1:11435:11434"]
+    volumes: [ollama-cache:/root/.ollama]
+
+  tei:
+    <<: *gpu
+    image: ghcr.io/huggingface/text-embeddings-inference:cuda-1.9@sha256:c831a5cedb89d62f7b0fdb59e2d73e8c30e10c1d5006897640e2ce58a71cedba
+    profiles: [tei]
+    ports: ["127.0.0.1:8081:80"]
+    environment:
+      CUDA_CACHE_PATH: /data/cuda-cache
+    volumes: [hf-benchmark-cache:/models/hf:ro, tei-cache:/data]
+    command: [--model-id, /models/hf/serving-bge-m3-512, --dtype, float32, --pooling, cls, --max-batch-tokens, "8192", --max-batch-requests, "32", --max-concurrent-requests, "2048", --auto-truncate, "false", --served-model-name, BAAI/bge-m3]
+
+  vllm:
+    <<: *gpu
+    image: vllm/vllm-openai:v0.30.0@sha256:8a69ffad015f138d7170c4ddc429e230a3bc1c1719f67e14324749df200a4b90
+    profiles: [vllm]
+    ports: ["127.0.0.1:8001:8000"]
+    volumes: [hf-benchmark-cache:/models/hf:ro, hf-cache:/root/.cache/huggingface]
+    shm_size: 2gb
+    command: [--model, /models/hf/serving-bge-m3, --served-model-name, BAAI/bge-m3, --runner, pooling, --hf-overrides, '{"architectures":["BgeM3EmbeddingModel"]}', --pooler-config.task, embed, --dtype, float32, --max-model-len, "512", --gpu-memory-utilization, "0.5", --enforce-eager, --max-num-batched-tokens, "8192"]
+
+volumes:
+  hf-benchmark-cache:
+  ollama-cache:
+  tei-cache:
+  hf-cache:

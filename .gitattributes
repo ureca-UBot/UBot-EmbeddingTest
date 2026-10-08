@@ -1,0 +1,3 @@
+# Frozen input, code and artifact manifests hash exact file bytes.
+# Disable line-ending conversion for new experiments, including JSONL and Python.
+experiments/** -text

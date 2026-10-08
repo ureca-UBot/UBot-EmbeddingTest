@@ -1,0 +1,4 @@
+FROM ubot-retrieval-benchmark:run-v1
+# Jina's frozen remote implementation imports an API removed in Transformers 5.
+# This adapter image is separate; the BGE and serving images remain unchanged.
+RUN /usr/bin/python3 -m pip install --no-cache-dir transformers==4.51.3 sentence-transformers==3.4.1

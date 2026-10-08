@@ -1,0 +1,176 @@
+{
+  "package": "ubot-v4-runtime",
+  "contains": "code, environment, documentation, hash-only dataset metadata; private data supplied separately",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "bytes": 60,
+      "sha256": "74aa4b57ce135e6a61abf2b74607ff326fb96a6aa0139451644bc93143c522c7"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 66,
+      "sha256": "fa08fbc83bf9a1fa6e7bb3c21c769115896bddf33404178f48fe79f12ccae1bc"
+    },
+    {
+      "path": "dataset.py",
+      "bytes": 7808,
+      "sha256": "405e5ed346d8b3d0e4b58c1778c88297a6e456aff02efa6a5147ca9331f5fa2c"
+    },
+    {
+      "path": "docker/Dockerfile.benchmark",
+      "bytes": 526,
+      "sha256": "e5ac1475df23ca3e2094c4997ac75f06fd5a1ec5b9705dec601fb9151f5048d6"
+    },
+    {
+      "path": "docker/Dockerfile.jina",
+      "bytes": 260,
+      "sha256": "a735ed0cdbefac0785174416da6a0f82236247eb752b98e519cb22b0519fcaa1"
+    },
+    {
+      "path": "docker/requirements-benchmark.lock",
+      "bytes": 349,
+      "sha256": "28d1159abdf3e90827054601e6ed7f590d39aa3387f171e53f6ba4365525c26b"
+    },
+    {
+      "path": "docker/requirements-jina.lock",
+      "bytes": 93,
+      "sha256": "cea61ad34a15b692391c3f74be5bbfcf60d3bfce91dbe30e5a8259fc22517139"
+    },
+    {
+      "path": "environment/base.json",
+      "bytes": 7104,
+      "sha256": "92e223b19649b43434a4e60431c22717a45dcfd1de130c1febfc0b9453d083ca"
+    },
+    {
+      "path": "environment/benchmark.json",
+      "bytes": 7501,
+      "sha256": "e9298d50c1dcc7ffb8c3127c328bf53b96b56bcadf0e04036967a7c76c79cbc3"
+    },
+    {
+      "path": "environment/jina.json",
+      "bytes": 7501,
+      "sha256": "2d4f759264ccbf9ca067fd28430d14bd1a7b40bcc1e1465c7b643941b47520bd"
+    },
+    {
+      "path": "environment/runtime-lock.json",
+      "bytes": 2880,
+      "sha256": "f32edb33c521a5c8ea88e4637a41a5222e8b8f8f9b2553b52706ed707a3d4774"
+    },
+    {
+      "path": "evaluation_contract.json",
+      "bytes": 2936,
+      "sha256": "61dcd31b6654c818364dafad7eb67fba7c055e6a5790c92f2db5f7b64f7d8074"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 5005,
+      "sha256": "71bc16b2176cf13b0a8c90ac3c88cdb0c55e6669069a6b6da47457971a33b237"
+    },
+    {
+      "path": "PACKAGE_VALIDATION.json",
+      "bytes": 1613,
+      "sha256": "88152a14b17bc5f0b5a90b70fc90375266e6db686fd10acc7bb5a95b4c214bb3"
+    },
+    {
+      "path": "Prepare.ps1",
+      "bytes": 3388,
+      "sha256": "043d46f19938df35175ffba45993448e56edb84330504b9bcef2f516937a4f86"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7400,
+      "sha256": "da33253c0c4e8c580fc883043d69f1346dec1e10c1657c1afe376da39c8829a3"
+    },
+    {
+      "path": "Run.ps1",
+      "bytes": 670,
+      "sha256": "523429972b0c07a04a64842a2f5a20b62de9543b9ee7a3852dee203ef4ae1d81"
+    },
+    {
+      "path": "scripts/compose_helpers.ps1",
+      "bytes": 967,
+      "sha256": "c4f84c18abbdddcfc09360430280b9eb214b220972cc0b1da93a5ce5429b3661"
+    },
+    {
+      "path": "scripts/import_dataset.py",
+      "bytes": 4707,
+      "sha256": "0292b3a6a7347cef8a96d7a515fc289e5870a386dfb157877ced7fd06961effc"
+    },
+    {
+      "path": "scripts/prepare_models.py",
+      "bytes": 2694,
+      "sha256": "e835fffdae284e2b88905c25f489a88e8cb4fcf5b526409109e29e543c91d6fd"
+    },
+    {
+      "path": "scripts/verify_environment.py",
+      "bytes": 798,
+      "sha256": "5430431b9faa2c697e4535575e817e1f6604f3ebd29d7f20c1c15cebf91297d8"
+    },
+    {
+      "path": "serving_test/.env.example",
+      "bytes": 424,
+      "sha256": "a9bbafa7e14c4557886cdaca2468984718941080c4b5d50bbaaac5a26dfe1729"
+    },
+    {
+      "path": "serving_test/common_v4.py",
+      "bytes": 9604,
+      "sha256": "14c0a82269786d37c072189e1a7fda9c3d338b5ae3a3ce9d6dfd1c28c1cf17d1"
+    },
+    {
+      "path": "serving_test/compare_v4.py",
+      "bytes": 17651,
+      "sha256": "8aff5ebb4d2e401c4f8b54101a6aa14d6325c58db7152b399ae50c288a6b1008"
+    },
+    {
+      "path": "serving_test/compose.yaml",
+      "bytes": 2528,
+      "sha256": "e257ff382725fb6f2fad30ed70b03b147cbc0900e856b5e776434dd1d06288a2"
+    },
+    {
+      "path": "serving_test/inspect_log.py",
+      "bytes": 975,
+      "sha256": "1c094f4f1a21faa476d7dc50840e8e483ef6ccf884bc329cee4fb889f59571e9"
+    },
+    {
+      "path": "serving_test/run_dense.ps1",
+      "bytes": 6720,
+      "sha256": "730028a6f9860ad6462a42df8cfcd4e576d90ebd9e1604f29c4dbad24934c3d4"
+    },
+    {
+      "path": "serving_test/run_native.py",
+      "bytes": 7669,
+      "sha256": "54327716b44b735e1b99883876907597aa145a1adb6869d2bdc935e0be42c3ec"
+    },
+    {
+      "path": "serving_test/run_remaining.ps1",
+      "bytes": 3112,
+      "sha256": "044b6ee52157ce7702524a19f335d59f79e1225ec72a15de5ec8f41b6dfceee6"
+    },
+    {
+      "path": "serving_test/run_rerank.py",
+      "bytes": 6793,
+      "sha256": "c3aaaaf41700dfd1885dd833a57225df5747ced3c4e67006c7385ef3266499ba"
+    },
+    {
+      "path": "serving_test/run_v4.py",
+      "bytes": 11854,
+      "sha256": "06e201e8fa55e53ffcdaac00a3d5e0cae225308caf54d01394f67d3015443a53"
+    },
+    {
+      "path": "serving_test/test_native_math.py",
+      "bytes": 1502,
+      "sha256": "6b1723e3a166fd6a50c8f12f3e44ea652fd07e4a47c1cb3a2913aaab9d45c0ca"
+    },
+    {
+      "path": "serving_test/test_runner.py",
+      "bytes": 2520,
+      "sha256": "4c76222e30b42d75e25ce3b3e61b7ccbf1575bd9cfcd69f209ca98bfbdaf878e"
+    },
+    {
+      "path": "Stop.ps1",
+      "bytes": 925,
+      "sha256": "bdb17ebd4fc80d3b56154e9c04ede55ee3f93ae42b418f66f6fa9c10700abe69"
+    }
+  ]
+}
