@@ -1,0 +1,13 @@
+{
+  "_설명": "데이터를 보기 전에 팀이 정한 값입니다. dev 분석 시작 뒤에는 바꾸지 마세요. 값이 클수록 그 결과가 나쁘다는 뜻입니다.",
+  "answerable": {
+    "correct": 0,
+    "incomplete": 2,
+    "wrong_delivery": 5,
+    "no_answer": 1
+  },
+  "unanswerable": {
+    "correct_refusal": 0,
+    "false_pass": 5
+  }
+}
